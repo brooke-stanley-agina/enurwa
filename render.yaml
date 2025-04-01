@@ -1,16 +1,16 @@
 services:
   - type: web
     name: enurwa-epic-safaris
-    env: python
+    runtime: python
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn enurwa_safaris.wsgi:application
     envVars:
       - key: PYTHON_VERSION
         value: 3.13.0
       - key: SECRET_KEY
-        generateValue: true
+        value: "generateValue: true"
       - key: DEBUG
-        value: false
+        value: "false"
       - key: ALLOWED_HOSTS
         value: ".onrender.com"
       - key: DATABASE_URL
