@@ -1,0 +1,1 @@
+web: gunicorn enurwa_safaris.wsgi:application 
