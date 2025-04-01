@@ -1,0 +1,249 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Enurwa Epic Safaris - Your Ultimate Safari Experience{% endblock %}
+
+{% block content %}
+    <!-- Packages Hero Section -->
+    <header class="page-hero packages-hero">
+        <div class="hero-content">
+            <h1>Safari Packages</h1>
+            <p>Choose from our carefully curated selection of African safari experiences</p>
+        </div>
+    </header>
+
+    <!-- Package Filters -->
+    <section class="package-filters">
+        <div class="filter-container">
+            <div class="filter-group">
+                <label>Package Type</label>
+                <select>
+                    <option value="">All Types</option>
+                    <option value="wildlife">Wildlife Safari</option>
+                    <option value="photography">Photography Tours</option>
+                    <option value="cultural">Cultural Tours</option>
+                    <option value="luxury">Luxury Safari</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Duration</label>
+                <select>
+                    <option value="">Any Duration</option>
+                    <option value="1-3">1-3 Days</option>
+                    <option value="4-7">4-7 Days</option>
+                    <option value="8+">8+ Days</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Budget Range</label>
+                <select>
+                    <option value="">Any Budget</option>
+                    <option value="budget">Budget ($100-$300/day)</option>
+                    <option value="mid">Mid-Range ($301-$600/day)</option>
+                    <option value="luxury">Luxury ($601+/day)</option>
+                </select>
+            </div>
+            <button class="filter-btn">Apply Filters</button>
+        </div>
+    </section>
+
+    <!-- Featured Packages -->
+    <section class="featured-packages">
+        <h2>Our Most Popular Packages</h2>
+        <div class="packages-grid">
+            <!-- Masai Mara Package -->
+            <div class="package-card">
+                <div class="package-image">
+                    <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801" alt="Masai Mara Safari">
+                    <div class="package-badge">Best Seller</div>
+                </div>
+                <div class="package-content">
+                    <h3>Masai Mara Wildlife Safari</h3>
+                    <div class="package-meta">
+                        <span><i class="fas fa-clock"></i> 5 Days</span>
+                        <span><i class="fas fa-users"></i> Max 6 People</span>
+                        <span><i class="fas fa-star"></i> 4.9 (128 Reviews)</span>
+                    </div>
+                    <div class="package-highlights">
+                        <h4>Highlights</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Game drives in 4x4 vehicles</li>
+                            <li><i class="fas fa-check"></i> Luxury tented accommodation</li>
+                            <li><i class="fas fa-check"></i> Professional wildlife guide</li>
+                            <li><i class="fas fa-check"></i> All meals included</li>
+                        </ul>
+                    </div>
+                    <div class="package-price">
+                        <div class="price-tag">
+                            <span class="amount">$1,299</span>
+                            <span class="per">per person</span>
+                        </div>
+                        <button class="book-now-btn">Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Serengeti Package -->
+            <div class="package-card">
+                <div class="package-image">
+                    <img src="https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5" alt="Serengeti Safari">
+                    <div class="package-badge premium">Premium</div>
+                </div>
+                <div class="package-content">
+                    <h3>Serengeti Migration Safari</h3>
+                    <div class="package-meta">
+                        <span><i class="fas fa-clock"></i> 7 Days</span>
+                        <span><i class="fas fa-users"></i> Max 4 People</span>
+                        <span><i class="fas fa-star"></i> 4.8 (96 Reviews)</span>
+                    </div>
+                    <div class="package-highlights">
+                        <h4>Highlights</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Witness the great migration</li>
+                            <li><i class="fas fa-check"></i> Luxury lodge accommodation</li>
+                            <li><i class="fas fa-check"></i> Hot air balloon safari</li>
+                            <li><i class="fas fa-check"></i> All-inclusive package</li>
+                        </ul>
+                    </div>
+                    <div class="package-price">
+                        <div class="price-tag">
+                            <span class="amount">$2,499</span>
+                            <span class="per">per person</span>
+                        </div>
+                        <button class="book-now-btn">Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add more package cards as needed -->
+        </div>
+    </section>
+
+    <!-- Package Categories -->
+    <section class="package-categories">
+        <h2>Explore by Category</h2>
+        <div class="categories-grid">
+            <div class="category-card wildlife">
+                <div class="category-overlay"></div>
+                <div class="category-content">
+                    <i class="fas fa-paw"></i>
+                    <h3>Wildlife Safaris</h3>
+                    <p>Experience Africa's majestic wildlife up close</p>
+                    <a href="#" class="category-link">View Packages <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="category-card photography">
+                <div class="category-overlay"></div>
+                <div class="category-content">
+                    <i class="fas fa-camera"></i>
+                    <h3>Photography Tours</h3>
+                    <p>Capture stunning moments in the wild</p>
+                    <a href="#" class="category-link">View Packages <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="category-card cultural">
+                <div class="category-overlay"></div>
+                <div class="category-content">
+                    <i class="fas fa-users"></i>
+                    <h3>Cultural Tours</h3>
+                    <p>Immerse in local traditions and customs</p>
+                    <a href="#" class="category-link">View Packages <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="category-card luxury">
+                <div class="category-overlay"></div>
+                <div class="category-content">
+                    <i class="fas fa-crown"></i>
+                    <h3>Luxury Safaris</h3>
+                    <p>Experience ultimate comfort in the wilderness</p>
+                    <a href="#" class="category-link">View Packages <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Same as other pages) -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Enurwa Epic Safaris</h3>
+                    <p class="footer-desc">Experience the magic of African wildlife with our expertly curated safari adventures. Your journey to the wild begins here.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" title="TripAdvisor"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                    <div class="certifications">
+                        <img src="https://via.placeholder.com/50" alt="Tourism Board" title="Certified by Tourism Board">
+                        <img src="https://via.placeholder.com/50" alt="Safari Association" title="Member of Safari Association">
+                        <img src="https://via.placeholder.com/50" alt="Travel Insurance" title="Insured and Bonded">
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Popular Destinations</h3>
+                    <ul class="two-column-list">
+                        <li><a href="#">Masai Mara</a></li>
+                        <li><a href="#">Serengeti</a></li>
+                        <li><a href="#">Amboseli</a></li>
+                        <li><a href="#">Lake Nakuru</a></li>
+                        <li><a href="#">Tsavo East</a></li>
+                        <li><a href="#">Tsavo West</a></li>
+                        <li><a href="#">Samburu</a></li>
+                        <li><a href="#">Ngorongoro</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Safari Packages</a></li>
+                        <li><a href="#">Custom Tours</a></li>
+                        <li><a href="#">Group Safaris</a></li>
+                        <li><a href="#">Travel Insurance</a></li>
+                        <li><a href="#">Travel Guide</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to receive special offers and updates</p>
+                    <form class="newsletter-form">
+                        <div class="form-group">
+                            <input type="email" placeholder="Your email address">
+                            <button type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +254 123 456 789</p>
+                        <p><i class="fas fa-envelope"></i> info@enurwaepicsafaris.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2024 Enurwa Epic Safaris. All rights reserved.</p>
+                <ul class="footer-bottom-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Sitemap</a></li>
+                </ul>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa" title="Visa"></i>
+                    <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+                    <i class="fab fa-cc-paypal" title="PayPal"></i>
+                    <i class="fab fa-mpesa" title="M-Pesa"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {% endblock %}

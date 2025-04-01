@@ -1,0 +1,127 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Enurwa Epic Safaris - Your Ultimate Safari Experience{% endblock %}
+
+{% block content %}
+    <!-- Contact Hero Section -->
+    <header class="page-hero contact-hero">
+        <div class="hero-content">
+            <h1>Get in Touch</h1>
+            <p>We're here to help plan your perfect African safari adventure</p>
+        </div>
+    </header>
+
+    <!-- Contact Information -->
+    <section class="contact-info-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>Phone</h3>
+                    <p>+254 123 456 789</p>
+                    <p>+254 987 654 321</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>info@enurwaepicsafaris.com</p>
+                    <p>bookings@enurwaepicsafaris.com</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Location</h3>
+                    <p>123 Safari Plaza</p>
+                    <p>Nairobi, Kenya</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Office Hours</h3>
+                    <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
+                    <p>Saturday: 9:00 AM - 2:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="contact-form-section">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="form-content">
+                    <h2>Send Us a Message</h2>
+                    <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+                    <form class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+                <div class="map-content">
+                    <div class="map-container">
+                        <!-- Replace with actual map embed code -->
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8193128667745!2d36.8170!3d-1.2841!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTcnMDIuOCJTIDM2wrA0OScwMS4yIkU!5e0!3m2!1sen!2sus!4v1635444444444!5m2!1sen!2sus" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>How do I book a safari?</h3>
+                    <p>You can book a safari through our online booking system, by email, or by calling us directly. We'll guide you through the process and help you choose the perfect package.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What's the best time to visit?</h3>
+                    <p>The best time depends on what you want to see. The Great Migration occurs between July and October, while the dry seasons (June-October and January-February) are generally best for wildlife viewing.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What's included in the safari packages?</h3>
+                    <p>Our packages typically include accommodation, meals, game drives, park fees, and professional guides. Specific inclusions vary by package and can be customized to your needs.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Do you offer custom safari packages?</h3>
+                    <p>Yes, we specialize in creating customized safari experiences tailored to your preferences, schedule, and budget.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Same footer content as other pages -->
+    </footer>
+    {% endblock %}

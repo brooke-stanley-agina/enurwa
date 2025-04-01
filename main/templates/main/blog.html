@@ -1,0 +1,121 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Enurwa Epic Safaris - Your Ultimate Safari Experience{% endblock %}
+
+{% block content %}
+    <!-- Blog Hero Section -->
+    <header class="page-hero blog-hero">
+        <div class="hero-content">
+            <h1>Safari Stories & Insights</h1>
+            <p>Discover tips, guides, and stories from the African wilderness</p>
+        </div>
+    </header>
+
+    <!-- Blog Categories -->
+    <section class="blog-categories">
+        <div class="container">
+            <div class="category-tabs">
+                <button class="category-tab active">All Posts</button>
+                <button class="category-tab">Wildlife</button>
+                <button class="category-tab">Travel Tips</button>
+                <button class="category-tab">Conservation</button>
+                <button class="category-tab">Culture</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Post -->
+    <section class="featured-post">
+        <div class="container">
+            <div class="featured-post-card">
+                <div class="featured-post-image">
+                    <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801" alt="Great Migration">
+                    <div class="post-category">Featured</div>
+                </div>
+                <div class="featured-post-content">
+                    <div class="post-meta">
+                        <span><i class="fas fa-calendar"></i> March 15, 2024</span>
+                        <span><i class="fas fa-user"></i> By Rolex Otieno</span>
+                        <span><i class="fas fa-folder"></i> Wildlife</span>
+                    </div>
+                    <h2>Ultimate Guide to the Great Migration in Masai Mara</h2>
+                    <p>Experience the breathtaking spectacle of nature as millions of wildebeest make their annual journey across the Serengeti-Mara ecosystem.</p>
+                    <a href="#" class="read-more-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <section class="blog-grid">
+        <div class="container">
+            <div class="posts-grid">
+                <!-- Blog Post 1 -->
+                <article class="blog-post">
+                    <div class="post-image">
+                        <img src="https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5" alt="Safari Photography">
+                        <div class="post-category">Photography</div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span><i class="fas fa-calendar"></i> March 10, 2024</span>
+                            <span><i class="fas fa-comments"></i> 12 Comments</span>
+                        </div>
+                        <h3>Top Tips for Wildlife Photography on Safari</h3>
+                        <p>Master the art of capturing stunning wildlife moments with our expert photography guide.</p>
+                        <a href="#" class="read-more-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 2 -->
+                <article class="blog-post">
+                    <div class="post-image">
+                        <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e" alt="Conservation">
+                        <div class="post-category">Conservation</div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span><i class="fas fa-calendar"></i> March 8, 2024</span>
+                            <span><i class="fas fa-comments"></i> 8 Comments</span>
+                        </div>
+                        <h3>Conservation Efforts in East African National Parks</h3>
+                        <p>Discover how local communities and organizations are working together to protect wildlife.</p>
+                        <a href="#" class="read-more-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Add more blog posts -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <span>...</span>
+                <a href="#">10</a>
+                <a href="#" class="next">Next <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="blog-newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Subscribe to Our Newsletter</h2>
+                <p>Get the latest safari stories, travel tips, and exclusive offers delivered to your inbox</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Same footer content as other pages -->
+    </footer>
+
+    {% endblock %}

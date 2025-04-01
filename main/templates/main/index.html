@@ -1,0 +1,300 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Enurwa Epic Safaris - Your Ultimate Safari Experience{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="animate-fade-in">Experience Epic African Safaris</h1>
+            <p class="animate-fade-in-delay">Discover the magic of African wildlife with our expertly curated safari experiences</p>
+            <div class="search-container animate-fade-in-delay">
+                <input type="text" placeholder="Search destinations or safari packages...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Destinations -->
+    <section class="featured-destinations">
+        <h2>Popular Safari Destinations</h2>
+        <div class="destination-grid">
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801" alt="Masai Mara">
+                <div class="card-content">
+                    <h3>Masai Mara</h3>
+                    <p>Experience the great wildebeest migration</p>
+                    <div class="card-meta">
+                        <span><i class="fas fa-clock"></i> 3-7 Days</span>
+                        <span><i class="fas fa-star"></i> 4.9</span>
+                    </div>
+                    <p class="price">
+                        From $299 <span>/person</span>
+                    </p>
+                    <button class="explore-btn">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53" alt="Serengeti">
+                <div class="card-content">
+                    <h3>Serengeti</h3>
+                    <p class="price">From $399/person</p>
+                    <p>Witness the endless plains of Tanzania</p>
+                    <div class="card-meta">
+                        <span><i class="fas fa-clock"></i> 4-8 Days</span>
+                        <span><i class="fas fa-star"></i> 4.8</span>
+                    </div>
+                    <button class="explore-btn">View Details</button>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801" alt="Amboseli">
+                <div class="card-content">
+                    <h3>Amboseli</h3>
+                    <p class="price">From $249/person</p>
+                    <p>See elephants with Mt. Kilimanjaro backdrop</p>
+                    <div class="card-meta">
+                        <span><i class="fas fa-clock"></i> 2-5 Days</span>
+                        <span><i class="fas fa-star"></i> 4.7</span>
+                    </div>
+                    <button class="explore-btn">View Details</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers -->
+    <section class="special-offers">
+        <h2>Limited Time Offers</h2>
+        <div class="offers-slider">
+            <div class="offer-card">
+                <div class="offer-badge">20% OFF</div>
+                <img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53" alt="Special Offer">
+                <div class="offer-content">
+                    <h3>Masai Mara Wildebeest Migration Special</h3>
+                    <p>Book now for the upcoming migration season</p>
+                    <p class="price"><span class="original">$599</span> $479</p>
+                    <button class="book-now-btn">Book Now</button>
+                </div>
+            </div>
+
+            <div class="offer-card">
+                <div class="offer-badge">15% OFF</div>
+                <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801" alt="Special Offer">
+                <div class="offer-content">
+                    <h3>Amboseli Elephant Safari</h3>
+                    <p>Experience the majestic elephants up close</p>
+                    <p class="price"><span class="original">$499</span> $424</p>
+                    <button class="book-now-btn">Book Now</button>
+                </div>
+            </div>
+
+            <div class="offer-card">
+                <div class="offer-badge">25% OFF</div>
+                <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e" alt="Special Offer">
+                <div class="offer-content">
+                    <h3>Serengeti Adventure Package</h3>
+                    <p>Ultimate safari experience in Tanzania</p>
+                    <p class="price"><span class="original">$799</span> $599</p>
+                    <button class="book-now-btn">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-choose-us">
+        <h2>Why Choose Enurwa Epic Safaris</h2>
+        <div class="features-grid">
+            <div class="feature">
+                <i class="fas fa-medal"></i>
+                <h3>Expert Guides</h3>
+                <p>Professional and experienced safari guides</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-hand-holding-usd"></i>
+                <h3>Best Price Guarantee</h3>
+                <p>Competitive prices and value for money</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Safe Travel</h3>
+                <p>Your safety is our top priority</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-heart"></i>
+                <h3>Tailored Experience</h3>
+                <p>Customized safaris to match your preferences</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="testimonials-container">
+            <h2>What Our Clients Say</h2>
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <div class="client-image">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Sarah Johnson">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-right"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Our safari experience with Enurwa Epic Safaris was absolutely incredible. The guides were knowledgeable, the accommodations were perfect, and we saw all the Big Five!"</p>
+                        <div class="client-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>United States</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="client-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="David Chen">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-right"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"The attention to detail and personalized service was outstanding. Our family safari was perfectly planned, and the memories will last a lifetime."</p>
+                        <div class="client-info">
+                            <h4>David Chen</h4>
+                            <p>Singapore</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="client-image">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80" alt="Emma Thompson">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-right"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"From the moment we landed to our departure, everything was seamless. The wildlife encounters were breathtaking, and the staff went above and beyond."</p>
+                        <div class="client-info">
+                            <h4>Emma Thompson</h4>
+                            <p>United Kingdom</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <div class="slider-dots"></div>
+                <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Enurwa Epic Safaris</h3>
+                    <p class="footer-desc">Experience the magic of African wildlife with our expertly curated safari adventures. Your journey to the wild begins here.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" title="TripAdvisor"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                    <div class="certifications">
+                        <img src="https://via.placeholder.com/50" alt="Tourism Board" title="Certified by Tourism Board">
+                        <img src="https://via.placeholder.com/50" alt="Safari Association" title="Member of Safari Association">
+                        <img src="https://via.placeholder.com/50" alt="Travel Insurance" title="Insured and Bonded">
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Popular Destinations</h3>
+                    <ul class="two-column-list">
+                        <li><a href="#">Masai Mara</a></li>
+                        <li><a href="#">Serengeti</a></li>
+                        <li><a href="#">Amboseli</a></li>
+                        <li><a href="#">Lake Nakuru</a></li>
+                        <li><a href="#">Tsavo East</a></li>
+                        <li><a href="#">Tsavo West</a></li>
+                        <li><a href="#">Samburu</a></li>
+                        <li><a href="#">Ngorongoro</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Safari Packages</a></li>
+                        <li><a href="#">Custom Tours</a></li>
+                        <li><a href="#">Group Safaris</a></li>
+                        <li><a href="#">Travel Insurance</a></li>
+                        <li><a href="#">Travel Guide</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to receive special offers and updates</p>
+                    <form class="newsletter-form">
+                        <div class="form-group">
+                            <input type="email" placeholder="Your email address">
+                            <button type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +254 123 456 789</p>
+                        <p><i class="fas fa-envelope"></i> info@enurwaepicsafaris.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2024 Enurwa Epic Safaris. All rights reserved.</p>
+                <ul class="footer-bottom-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Sitemap</a></li>
+                </ul>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa" title="Visa"></i>
+                    <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+                    <i class="fab fa-cc-paypal" title="PayPal"></i>
+                    <i class="fab fa-mpesa" title="M-Pesa"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
