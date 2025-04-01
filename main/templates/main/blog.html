@@ -4,118 +4,141 @@
 
 {% block content %}
     <!-- Blog Hero Section -->
-    <header class="page-hero blog-hero">
-        <div class="hero-content">
-            <h1>Safari Stories & Insights</h1>
-            <p>Discover tips, guides, and stories from the African wilderness</p>
+    <header class="relative h-[60vh] flex items-center justify-center bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1516426122078-c23e76319801');">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">Safari Stories & Insights</h1>
+            <p class="text-xl md:text-2xl">Discover tips, guides, and stories from the African wilderness</p>
         </div>
     </header>
 
     <!-- Blog Categories -->
-    <section class="blog-categories">
-        <div class="container">
-            <div class="category-tabs">
-                <button class="category-tab active">All Posts</button>
-                <button class="category-tab">Wildlife</button>
-                <button class="category-tab">Travel Tips</button>
-                <button class="category-tab">Conservation</button>
-                <button class="category-tab">Culture</button>
+    <section class="py-8 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="px-6 py-2 rounded-full bg-accent text-white hover:bg-accent-light transition duration-300">All Posts</button>
+                <button class="px-6 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition duration-300">Wildlife</button>
+                <button class="px-6 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition duration-300">Travel Tips</button>
+                <button class="px-6 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition duration-300">Conservation</button>
+                <button class="px-6 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition duration-300">Culture</button>
             </div>
         </div>
     </section>
 
     <!-- Featured Post -->
-    <section class="featured-post">
-        <div class="container">
-            <div class="featured-post-card">
-                <div class="featured-post-image">
-                    <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801" alt="Great Migration">
-                    <div class="post-category">Featured</div>
-                </div>
-                <div class="featured-post-content">
-                    <div class="post-meta">
-                        <span><i class="fas fa-calendar"></i> March 15, 2024</span>
-                        <span><i class="fas fa-user"></i> By Rolex Otieno</span>
-                        <span><i class="fas fa-folder"></i> Wildlife</span>
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="relative rounded-xl overflow-hidden shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801" alt="Great Migration" class="w-full h-[500px] object-cover">
+                    <div class="absolute top-4 left-4 bg-accent text-white px-4 py-2 rounded-full text-sm font-medium">
+                        Featured
                     </div>
-                    <h2>Ultimate Guide to the Great Migration in Masai Mara</h2>
-                    <p>Experience the breathtaking spectacle of nature as millions of wildebeest make their annual journey across the Serengeti-Mara ecosystem.</p>
-                    <a href="#" class="read-more-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div>
+                    <div class="flex flex-wrap gap-4 text-sm text-gray-600 mb-6">
+                        <span class="flex items-center">
+                            <i class="fas fa-calendar mr-2"></i> March 15, 2024
+                        </span>
+                        <span class="flex items-center">
+                            <i class="fas fa-user mr-2"></i> By Rolex Otieno
+                        </span>
+                        <span class="flex items-center">
+                            <i class="fas fa-folder mr-2"></i> Wildlife
+                        </span>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Ultimate Guide to the Great Migration in Masai Mara</h2>
+                    <p class="text-gray-600 mb-8">Experience the breathtaking spectacle of nature as millions of wildebeest make their annual journey across the Serengeti-Mara ecosystem.</p>
+                    <a href="#" class="inline-flex items-center text-accent hover:text-accent-light transition duration-300">
+                        Read More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Blog Grid -->
-    <section class="blog-grid">
-        <div class="container">
-            <div class="posts-grid">
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Blog Post 1 -->
-                <article class="blog-post">
-                    <div class="post-image">
-                        <img src="https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5" alt="Safari Photography">
-                        <div class="post-category">Photography</div>
-                    </div>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span><i class="fas fa-calendar"></i> March 10, 2024</span>
-                            <span><i class="fas fa-comments"></i> 12 Comments</span>
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                    <div class="relative h-64">
+                        <img src="https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5" alt="Safari Photography" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 bg-accent text-white px-4 py-2 rounded-full text-sm font-medium">
+                            Photography
                         </div>
-                        <h3>Top Tips for Wildlife Photography on Safari</h3>
-                        <p>Master the art of capturing stunning wildlife moments with our expert photography guide.</p>
-                        <a href="#" class="read-more-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
+                            <span class="flex items-center">
+                                <i class="fas fa-calendar mr-2"></i> March 10, 2024
+                            </span>
+                            <span class="flex items-center">
+                                <i class="fas fa-comments mr-2"></i> 12 Comments
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Top Tips for Wildlife Photography on Safari</h3>
+                        <p class="text-gray-600 mb-6">Master the art of capturing stunning wildlife moments with our expert photography guide.</p>
+                        <a href="#" class="inline-flex items-center text-accent hover:text-accent-light transition duration-300">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
                     </div>
                 </article>
 
                 <!-- Blog Post 2 -->
-                <article class="blog-post">
-                    <div class="post-image">
-                        <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e" alt="Conservation">
-                        <div class="post-category">Conservation</div>
-                    </div>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span><i class="fas fa-calendar"></i> March 8, 2024</span>
-                            <span><i class="fas fa-comments"></i> 8 Comments</span>
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                    <div class="relative h-64">
+                        <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e" alt="Conservation" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 bg-accent text-white px-4 py-2 rounded-full text-sm font-medium">
+                            Conservation
                         </div>
-                        <h3>Conservation Efforts in East African National Parks</h3>
-                        <p>Discover how local communities and organizations are working together to protect wildlife.</p>
-                        <a href="#" class="read-more-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
+                            <span class="flex items-center">
+                                <i class="fas fa-calendar mr-2"></i> March 8, 2024
+                            </span>
+                            <span class="flex items-center">
+                                <i class="fas fa-comments mr-2"></i> 8 Comments
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Conservation Efforts in East African National Parks</h3>
+                        <p class="text-gray-600 mb-6">Discover how local communities and organizations are working together to protect wildlife.</p>
+                        <a href="#" class="inline-flex items-center text-accent hover:text-accent-light transition duration-300">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
                     </div>
                 </article>
 
-                <!-- Add more blog posts -->
+                <!-- Add more blog posts as needed -->
             </div>
 
             <!-- Pagination -->
-            <div class="pagination">
-                <a href="#" class="active">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <span>...</span>
-                <a href="#">10</a>
-                <a href="#" class="next">Next <i class="fas fa-arrow-right"></i></a>
+            <div class="flex justify-center items-center space-x-2 mt-12">
+                <a href="#" class="w-10 h-10 flex items-center justify-center rounded-lg bg-accent text-white hover:bg-accent-light transition duration-300">1</a>
+                <a href="#" class="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition duration-300">2</a>
+                <a href="#" class="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition duration-300">3</a>
+                <span class="text-gray-500">...</span>
+                <a href="#" class="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition duration-300">10</a>
+                <a href="#" class="flex items-center text-accent hover:text-accent-light transition duration-300">
+                    Next <i class="fas fa-arrow-right ml-2"></i>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Newsletter Section -->
-    <section class="blog-newsletter">
-        <div class="container">
-            <div class="newsletter-content">
-                <h2>Subscribe to Our Newsletter</h2>
-                <p>Get the latest safari stories, travel tips, and exclusive offers delivered to your inbox</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Enter your email address">
-                    <button type="submit">Subscribe</button>
-                </form>
-            </div>
+    <section class="py-16 bg-white">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Subscribe to Our Newsletter</h2>
+            <p class="text-xl text-gray-600 mb-8">Get the latest safari stories, travel tips, and exclusive offers delivered to your inbox</p>
+            <form class="flex gap-4">
+                <input type="email" placeholder="Enter your email address" class="flex-1 px-6 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
+                <button type="submit" class="px-8 py-3 bg-accent text-white rounded-lg hover:bg-accent-light transition duration-300">
+                    Subscribe
+                </button>
+            </form>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <!-- Same footer content as other pages -->
-    </footer>
-
-    {% endblock %}
+{% endblock %}

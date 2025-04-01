@@ -1,0 +1,119 @@
+{% extends "admin/index.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div id="content-main">
+    <!-- Statistics Dashboard -->
+    <div class="dashboard-stats">
+        <div class="stat-card">
+            <i class="fas fa-calendar-check"></i>
+            <div class="stat-info">
+                <h3>{{ active_bookings }}</h3>
+                <p>{% trans "Active Bookings" %}</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-users"></i>
+            <div class="stat-info">
+                <h3>{{ total_customers }}</h3>
+                <p>{% trans "Total Customers" %}</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-star"></i>
+            <div class="stat-info">
+                <h3>{{ featured_safaris }}</h3>
+                <p>{% trans "Featured Safaris" %}</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-star-half-alt"></i>
+            <div class="stat-info">
+                <h3>{{ avg_rating }}</h3>
+                <p>{% trans "Average Rating" %}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <h2>{% trans "Quick Actions" %}</h2>
+        <div class="action-buttons">
+            <a href="{% url 'admin:main_booking_add' %}" class="action-button">
+                <i class="fas fa-plus"></i>
+                {% trans "Add Booking" %}
+            </a>
+            <a href="{% url 'admin:main_package_add' %}" class="action-button">
+                <i class="fas fa-plus"></i>
+                {% trans "Add Safari" %}
+            </a>
+            <a href="{% url 'admin:main_destination_add' %}" class="action-button">
+                <i class="fas fa-plus"></i>
+                {% trans "Add Destination" %}
+            </a>
+            <a href="{% url 'admin:main_testimonial_add' %}" class="action-button">
+                <i class="fas fa-plus"></i>
+                {% trans "Add Testimonial" %}
+            </a>
+        </div>
+    </div>
+
+    <!-- Recent Actions -->
+    <div class="recent-actions">
+        <h2>{% trans "Recent Actions" %}</h2>
+        <div class="action-list">
+            {% for log in recent_actions %}
+            <div class="action-item">
+                <i class="fas fa-history"></i>
+                <div class="action-details">
+                    <p>{{ log.content_type.name }}: {{ log.object_repr }}</p>
+                    <small>{{ log.action_time|date:"F j, Y, g:i a" }}</small>
+                </div>
+            </div>
+            {% empty %}
+            <p>{% trans "No recent actions" %}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- App List -->
+    {% if app_list %}
+        <div class="app-list module">
+            {% for app in app_list %}
+                <table>
+                    <caption>
+                        <a href="{{ app.app_url }}" class="section" title="{% blocktranslate with name=app.name %}Models in the {{ name }} application{% endblocktranslate %}">{{ app.name }}</a>
+                    </caption>
+                    {% for model in app.models %}
+                        <tr class="model-{{ model.object_name|lower }}">
+                            {% if model.admin_url %}
+                                <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+                            {% else %}
+                                <th scope="row">{{ model.name }}</th>
+                            {% endif %}
+
+                            {% if model.add_url %}
+                                <td><a href="{{ model.add_url }}" class="addlink">{% translate 'Add' %}</a></td>
+                            {% else %}
+                                <td>&nbsp;</td>
+                            {% endif %}
+
+                            {% if model.admin_url and show_changelinks %}
+                                {% if model.view_only %}
+                                    <td><a href="{{ model.admin_url }}" class="viewlink">{% translate 'View' %}</a></td>
+                                {% else %}
+                                    <td><a href="{{ model.admin_url }}" class="changelink">{% translate 'Change' %}</a></td>
+                                {% endif %}
+                            {% else %}
+                                <td>&nbsp;</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>{% translate "You don't have permission to view or edit anything." %}</p>
+    {% endif %}
+</div>
+{% endblock %} 

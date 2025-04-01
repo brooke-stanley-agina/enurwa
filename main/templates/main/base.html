@@ -1,97 +1,147 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Enurwa Epic Safaris{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#2E7D32', // Forest green
+                            dark: '#1B5E20',    // Deep green
+                            light: '#4CAF50',   // Light green
+                            sage: '#81C784',    // Sage green
+                            olive: '#827717',   // Olive green
+                        },
+                        earth: {
+                            DEFAULT: '#8B4513', // Saddle brown
+                            dark: '#654321',    // Dark brown
+                            light: '#A0522D',   // Light brown
+                            sand: '#DEB887',    // Burly wood
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
     {% block extra_css %}{% endblock %}
 </head>
-<body>
+<body class="font-sans antialiased bg-primary-sage/10">
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <img src="{% static 'images/1.png' %}" alt="Enurwa Epic Safaris">
+    <nav class="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'images/1.png' %}" alt="Enurwa Epic Safaris" class="h-12 w-auto transition-transform duration-300 hover:scale-105">
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="{% url 'home' %}" class="text-gray-700 hover:text-primary transition-colors duration-300">Home</a>
+                    <a href="{% url 'about' %}" class="text-gray-700 hover:text-primary transition-colors duration-300">About</a>
+                    <a href="{% url 'destinations' %}" class="text-gray-700 hover:text-primary transition-colors duration-300">Destinations</a>
+                    <a href="{% url 'packages' %}" class="text-gray-700 hover:text-primary transition-colors duration-300">Packages</a>
+                    <a href="{% url 'blog_list' %}" class="text-gray-700 hover:text-primary transition-colors duration-300">Blog</a>
+                    <a href="{% url 'contact' %}" class="text-gray-700 hover:text-primary transition-colors duration-300">Contact</a>
+                    <a href="{% url 'book' %}" class="bg-primary hover:bg-primary-light text-white px-6 py-2 rounded-lg transition duration-300">Book Now</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-button" class="md:hidden text-primary hover:text-primary-light transition-colors duration-300">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
             </div>
-            
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
+        </div>
 
-            <ul class="nav-links">
-                <li><a href="{% url 'home' %}" {% if request.path == '/' %}class="active"{% endif %}>Home</a></li>
-                <li class="dropdown">
-                    <a href="{% url 'destinations' %}">Destinations <i class="fas fa-chevron-down"></i></a>
-                    <div class="dropdown-content">
-                        <a href="#">Masai Mara</a>
-                        <a href="#">Serengeti</a>
-                        <a href="#">Amboseli</a>
-                        <a href="#">Tsavo</a>
-                    </div>
-                </li>
-                <li class="dropdown">
-                    <a href="{% url 'packages' %}">Safari Packages <i class="fas fa-chevron-down"></i></a>
-                    <div class="dropdown-content">
-                        <a href="#">Wildlife Safaris</a>
-                        <a href="#">Photography Tours</a>
-                        <a href="#">Cultural Tours</a>
-                        <a href="#">Luxury Safaris</a>
-                    </div>
-                </li>
-                <li><a href="{% url 'about' %}" {% if request.path == '/about/' %}class="active"{% endif %}>About Us</a></li>
-                <li><a href="{% url 'blog' %}" {% if request.path == '/blog/' %}class="active"{% endif %}>Blog</a></li>
-                <li><a href="{% url 'contact' %}" {% if request.path == '/contact/' %}class="active"{% endif %}>Contact</a></li>
-            </ul>
-
-            <div class="nav-right">
-                <a href="{% url 'book' %}" class="book-now-btn">Book Safari</a>
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="{% url 'home' %}" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300">Home</a>
+                <a href="{% url 'about' %}" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300">About</a>
+                <a href="{% url 'destinations' %}" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300">Destinations</a>
+                <a href="{% url 'packages' %}" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300">Packages</a>
+                <a href="{% url 'blog_list' %}" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300">Blog</a>
+                <a href="{% url 'contact' %}" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300">Contact</a>
+                <a href="{% url 'book' %}" class="block px-3 py-2 bg-primary text-white hover:bg-primary-light rounded-md transition-colors duration-300">Book Now</a>
             </div>
         </div>
     </nav>
 
-    {% block content %}{% endblock %}
+    <!-- Main Content -->
+    <main class="pt-16">
+        {% block content %}{% endblock %}
+    </main>
 
-    <footer class="footer">
-        <div class="footer-top">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Enurwa Epic Safaris</h3>
-                    <p>Your gateway to unforgettable African adventures.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
+    <!-- Footer -->
+    <footer class="bg-primary-dark text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <img src="{% static 'images/1.png' %}" alt="Enurwa Epic Safaris" class="h-12 w-auto mb-4">
+                    <p class="text-gray-300">Experience the magic of African wildlife with our expertly curated safari experiences.</p>
                 </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="{% url 'home' %}">Home</a></li>
-                        <li><a href="{% url 'destinations' %}">Destinations</a></li>
-                        <li><a href="{% url 'packages' %}">Safari Packages</a></li>
-                        <li><a href="{% url 'about' %}">About Us</a></li>
-                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="{% url 'home' %}" class="text-gray-300 hover:text-white transition-colors duration-300">Home</a></li>
+                        <li><a href="{% url 'about' %}" class="text-gray-300 hover:text-white transition-colors duration-300">About</a></li>
+                        <li><a href="{% url 'destinations' %}" class="text-gray-300 hover:text-white transition-colors duration-300">Destinations</a></li>
+                        <li><a href="{% url 'packages' %}" class="text-gray-300 hover:text-white transition-colors duration-300">Packages</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <p><i class="fas fa-phone"></i> +254 123 456 789</p>
-                    <p><i class="fas fa-envelope"></i> info@enurwaepicsafaris.com</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><i class="fas fa-phone mr-2"></i> +254 123 456 789</li>
+                        <li><i class="fas fa-envelope mr-2"></i> info@enurwaepicsafaris.com</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> Nairobi, Kenya</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; {% now "Y" %} Enurwa Epic Safaris. All rights reserved.</p>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-300">
+                <p>&copy; {% now "Y" %} Enurwa Epic Safaris. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
-    <script src="{% static 'script.js' %}"></script>
+    <!-- Mobile Menu Script -->
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

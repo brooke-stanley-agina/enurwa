@@ -1,266 +1,99 @@
 {% extends 'main/base.html' %}
+{% load static %}
 
-{% block title %}Enurwa Epic Safaris - Your Ultimate Safari Experience{% endblock %}
+{% block title %}Safari Destinations - Enurwa Epic Safaris{% endblock %}
 
 {% block content %}
-    <!-- Destinations Hero -->
-    <header class="page-hero destinations-hero">
-        <div class="hero-content">
-            <h1>Our Safari Destinations</h1>
-            <p>Explore Africa's most breathtaking wildlife sanctuaries</p>
-        </div>
-    </header>
+<!-- Hero Section -->
+<section class="relative py-20 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1516426122078-c23e76319801');">
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="relative z-10 container mx-auto px-4 text-center text-white">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Explore Our Safari Destinations</h1>
+        <p class="text-xl max-w-2xl mx-auto">Discover the most breathtaking wildlife destinations in East Africa, from the iconic Masai Mara to the pristine Serengeti.</p>
+    </div>
+</section>
 
-    <!-- Destination Filters -->
-    <section class="destination-filters">
-        <div class="filter-container">
-            <div class="filter-group">
-                <label>Location</label>
-                <select>
-                    <option value="">All Locations</option>
-                    <option value="kenya">Kenya</option>
-                    <option value="tanzania">Tanzania</option>
-                    <option value="uganda">Uganda</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label>Duration</label>
-                <select>
-                    <option value="">Any Duration</option>
-                    <option value="1-3">1-3 Days</option>
-                    <option value="4-7">4-7 Days</option>
-                    <option value="8+">8+ Days</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label>Price Range</label>
-                <select>
-                    <option value="">Any Price</option>
-                    <option value="budget">Budget ($100-$300)</option>
-                    <option value="mid">Mid-Range ($301-$600)</option>
-                    <option value="luxury">Luxury ($601+)</option>
-                </select>
-            </div>
-            <button class="filter-btn">Apply Filters</button>
-        </div>
-    </section>
-
-    <!-- Destinations Grid -->
-    <section class="destinations-grid">
-        <div class="destination-item">
-            <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801" alt="Masai Mara">
-            <div class="destination-overlay">
-                <h3>Masai Mara</h3>
-                <p>Kenya's Premier Wildlife Reserve</p>
-                <div class="destination-meta">
-                    <span><i class="fas fa-map-marker-alt"></i> Kenya</span>
-                    <span><i class="fas fa-clock"></i> 3-7 Days</span>
-                </div>
-                <button class="view-details-btn">View Details</button>
+<!-- Destinations Grid -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <!-- Filter Section -->
+        <div class="mb-12">
+            <div class="flex flex-wrap gap-4 justify-center">
+                <button class="px-6 py-2 rounded-full bg-primary text-white hover:bg-primary-light transition duration-300">
+                    All Destinations
+                </button>
+                <button class="px-6 py-2 rounded-full bg-white text-gray-700 hover:bg-gray-100 transition duration-300">
+                    Featured
+                </button>
+                <button class="px-6 py-2 rounded-full bg-white text-gray-700 hover:bg-gray-100 transition duration-300">
+                    Popular
+                </button>
             </div>
         </div>
 
-        <div class="destination-item">
-            <img src="https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5" alt="Serengeti">
-            <div class="destination-overlay">
-                <h3>Serengeti</h3>
-                <p>Witness the Great Migration</p>
-                <div class="destination-meta">
-                    <span><i class="fas fa-map-marker-alt"></i> Tanzania</span>
-                    <span><i class="fas fa-clock"></i> 4-8 Days</span>
+        <!-- Destinations Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for destination in destinations %}
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                <div class="relative">
+                    <img src="{{ destination.image.url }}" alt="{{ destination.name }}" class="w-full h-64 object-cover">
+                    {% if destination.featured %}
+                    <div class="absolute top-4 right-4 bg-primary text-white px-4 py-1 rounded-full text-sm font-bold">
+                        Featured
+                    </div>
+                    {% endif %}
                 </div>
-                <button class="view-details-btn">View Details</button>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold mb-2 text-gray-900">{{ destination.name }}</h3>
+                    <p class="text-gray-600 mb-4">{{ destination.description|truncatewords:20 }}</p>
+                    <div class="flex justify-between mb-4 text-sm text-gray-500">
+                        <span><i class="fas fa-clock mr-1"></i> {{ destination.package_set.first.duration }}-{{ destination.package_set.last.duration }} Days</span>
+                        <span><i class="fas fa-star text-yellow-400 mr-1"></i> 4.9</span>
+                    </div>
+                    <p class="text-2xl font-bold text-primary mb-4">
+                        From ${{ destination.package_set.first.price }} <span class="text-sm text-gray-500">/person</span>
+                    </p>
+                    <a href="{% url 'destination_detail' destination.slug %}" class="block w-full bg-primary hover:bg-primary-light text-white py-3 rounded-lg transition duration-300 text-center">
+                        View Details <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-span-full text-center py-12">
+                <p class="text-gray-600">No destinations found.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Why Choose Our Destinations</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-map-marked-alt text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Prime Locations</h3>
+                <p class="text-gray-600">Carefully selected destinations offering the best wildlife viewing opportunities.</p>
+            </div>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-shield-alt text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Safe & Secure</h3>
+                <p class="text-gray-600">All destinations are thoroughly vetted for safety and security.</p>
+            </div>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-hand-holding-usd text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Best Value</h3>
+                <p class="text-gray-600">Competitive prices for premium safari experiences.</p>
             </div>
         </div>
-
-        <div class="destination-item">
-            <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e" alt="Amboseli">
-            <div class="destination-overlay">
-                <h3>Amboseli</h3>
-                <p>Elephants & Mt. Kilimanjaro Views</p>
-                <div class="destination-meta">
-                    <span><i class="fas fa-map-marker-alt"></i> Kenya</span>
-                    <span><i class="fas fa-clock"></i> 2-5 Days</span>
-                </div>
-                <button class="view-details-btn">View Details</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Safari Locations Section -->
-    <section class="safari-locations">
-        <h2>Our Safari Locations</h2>
-        <p class="section-subtitle">Discover the most breathtaking wildlife destinations across East Africa</p>
-        
-        <div class="locations-container">
-            <div class="location-card masai-mara">
-                <div class="location-image">
-                    <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801" alt="Masai Mara">
-                    <div class="location-overlay"></div>
-                </div>
-                <div class="location-content">
-                    <h3>Masai Mara</h3>
-                    <div class="location-stats">
-                        <span><i class="fas fa-map-marker-alt"></i> Kenya</span>
-                        <span><i class="fas fa-clock"></i> Best Time: July-October</span>
-                    </div>
-                    <p>Home to the great wildebeest migration and big five</p>
-                    <div class="wildlife-icons">
-                        <span title="Lions"><i class="fas fa-paw"></i></span>
-                        <span title="Elephants"><i class="fas fa-horse"></i></span>
-                        <span title="Giraffes"><i class="fas fa-tree"></i></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="location-card serengeti">
-                <div class="location-image">
-                    <img src="https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5" alt="Serengeti">
-                    <div class="location-overlay"></div>
-                </div>
-                <div class="location-content">
-                    <h3>Serengeti</h3>
-                    <div class="location-stats">
-                        <span><i class="fas fa-map-marker-alt"></i> Tanzania</span>
-                        <span><i class="fas fa-clock"></i> Best Time: June-September</span>
-                    </div>
-                    <p>Endless plains teeming with wildlife and adventure</p>
-                    <div class="wildlife-icons">
-                        <span title="Zebras"><i class="fas fa-horse"></i></span>
-                        <span title="Cheetahs"><i class="fas fa-cat"></i></span>
-                        <span title="Birds"><i class="fas fa-dove"></i></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="location-card amboseli">
-                <div class="location-image">
-                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e" alt="Amboseli">
-                    <div class="location-overlay"></div>
-                </div>
-                <div class="location-content">
-                    <h3>Amboseli</h3>
-                    <div class="location-stats">
-                        <span><i class="fas fa-map-marker-alt"></i> Kenya</span>
-                        <span><i class="fas fa-clock"></i> Best Time: June-October</span>
-                    </div>
-                    <p>Elephants against the backdrop of Mt. Kilimanjaro</p>
-                    <div class="wildlife-icons">
-                        <span title="Elephants"><i class="fas fa-horse"></i></span>
-                        <span title="Flamingos"><i class="fas fa-feather"></i></span>
-                        <span title="Hippos"><i class="fas fa-water"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="location-map">
-            <div class="map-container">
-                <div class="map-point masai" data-location="Masai Mara">
-                    <div class="point-pulse"></div>
-                    <div class="location-popup">
-                        <h4>Masai Mara</h4>
-                        <p>Kenya's Premier Safari Destination</p>
-                    </div>
-                </div>
-                <div class="map-point serengeti" data-location="Serengeti">
-                    <div class="point-pulse"></div>
-                    <div class="location-popup">
-                        <h4>Serengeti</h4>
-                        <p>Tanzania's Endless Plains</p>
-                    </div>
-                </div>
-                <div class="map-point amboseli" data-location="Amboseli">
-                    <div class="point-pulse"></div>
-                    <div class="location-popup">
-                        <h4>Amboseli</h4>
-                        <p>Land of Giants</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-top">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Enurwa Epic Safaris</h3>
-                    <p class="footer-desc">Experience the magic of African wildlife with our expertly curated safari adventures. Your journey to the wild begins here.</p>
-                    <div class="social-links">
-                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
-                        <a href="#" title="TripAdvisor"><i class="fab fa-tripadvisor"></i></a>
-                    </div>
-                    <div class="certifications">
-                        <img src="https://via.placeholder.com/50" alt="Tourism Board" title="Certified by Tourism Board">
-                        <img src="https://via.placeholder.com/50" alt="Safari Association" title="Member of Safari Association">
-                        <img src="https://via.placeholder.com/50" alt="Travel Insurance" title="Insured and Bonded">
-                    </div>
-                </div>
-
-                <div class="footer-section">
-                    <h3>Popular Destinations</h3>
-                    <ul class="two-column-list">
-                        <li><a href="#">Masai Mara</a></li>
-                        <li><a href="#">Serengeti</a></li>
-                        <li><a href="#">Amboseli</a></li>
-                        <li><a href="#">Lake Nakuru</a></li>
-                        <li><a href="#">Tsavo East</a></li>
-                        <li><a href="#">Tsavo West</a></li>
-                        <li><a href="#">Samburu</a></li>
-                        <li><a href="#">Ngorongoro</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#">Safari Packages</a></li>
-                        <li><a href="#">Custom Tours</a></li>
-                        <li><a href="#">Group Safaris</a></li>
-                        <li><a href="#">Travel Insurance</a></li>
-                        <li><a href="#">Travel Guide</a></li>
-                        <li><a href="#">FAQs</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-section">
-                    <h3>Newsletter</h3>
-                    <p>Subscribe to receive special offers and updates</p>
-                    <form class="newsletter-form">
-                        <div class="form-group">
-                            <input type="email" placeholder="Your email address">
-                            <button type="submit">Subscribe</button>
-                        </div>
-                    </form>
-                    <div class="contact-info">
-                        <p><i class="fas fa-phone"></i> +254 123 456 789</p>
-                        <p><i class="fas fa-envelope"></i> info@enurwaepicsafaris.com</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="footer-bottom-content">
-                <p>&copy; 2024 Enurwa Epic Safaris. All rights reserved.</p>
-                <ul class="footer-bottom-links">
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms & Conditions</a></li>
-                    <li><a href="#">Sitemap</a></li>
-                </ul>
-                <div class="payment-methods">
-                    <i class="fab fa-cc-visa" title="Visa"></i>
-                    <i class="fab fa-cc-mastercard" title="Mastercard"></i>
-                    <i class="fab fa-cc-paypal" title="PayPal"></i>
-                    <i class="fab fa-mpesa" title="M-Pesa"></i>
-                </div>
-            </div>
-        </div>
-    </footer>
-    {% endblock %}
+    </div>
+</section>
+{% endblock %}

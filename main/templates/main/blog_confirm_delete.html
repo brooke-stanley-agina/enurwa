@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-12">
+    <div class="max-w-2xl mx-auto">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8">Delete Blog Post</h1>
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <p class="text-gray-700 mb-6">Are you sure you want to delete the blog post "{{ object.title }}"? This action cannot be undone.</p>
+
+            <form method="post" class="flex items-center justify-end space-x-4">
+                {% csrf_token %}
+                <a href="{% url 'blog_list' %}" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition duration-300">
+                    Cancel
+                </a>
+                <button type="submit" class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300">
+                    Delete Post
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %} 

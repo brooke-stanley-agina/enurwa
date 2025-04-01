@@ -1,0 +1,116 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}{{ destination.name }} - Enurwa Epic Safaris{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative py-20 bg-cover bg-center" style="background-image: url('{{ destination.image.url }}');">
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="relative z-10 container mx-auto px-4 text-center text-white">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">{{ destination.name }}</h1>
+        <p class="text-xl max-w-2xl mx-auto">{{ destination.description }}</p>
+    </div>
+</section>
+
+<!-- Destination Details -->
+<section class="py-16">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Main Content -->
+            <div class="lg:col-span-2">
+                <!-- Destination Information -->
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                    <h2 class="text-2xl font-bold mb-4">About {{ destination.name }}</h2>
+                    <div class="prose max-w-none">
+                        {{ destination.description|safe }}
+                    </div>
+                </div>
+
+                <!-- Wildlife Information -->
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                    <h2 class="text-2xl font-bold mb-4">Wildlife & Attractions</h2>
+                    <div class="prose max-w-none">
+                        {{ destination.wildlife_info|safe }}
+                    </div>
+                </div>
+
+                <!-- Best Time to Visit -->
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                    <h2 class="text-2xl font-bold mb-4">Best Time to Visit</h2>
+                    <div class="prose max-w-none">
+                        {{ destination.best_time_to_visit|safe }}
+                    </div>
+                </div>
+
+                <!-- Travel Tips -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold mb-4">Travel Tips</h2>
+                    <div class="prose max-w-none">
+                        {{ destination.travel_tips|safe }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="lg:col-span-1">
+                <!-- Available Packages -->
+                <div class="bg-white rounded-xl shadow-lg p-6 sticky top-8">
+                    <h3 class="text-xl font-bold mb-4">Available Packages</h3>
+                    <div class="space-y-4">
+                        {% for package in packages %}
+                        <div class="border rounded-lg overflow-hidden">
+                            <img src="{{ package.images.first.image.url }}" alt="{{ package.name }}" class="w-full h-32 object-cover">
+                            <div class="p-4">
+                                <h4 class="font-semibold text-gray-900">{{ package.name }}</h4>
+                                <div class="flex justify-between items-center mt-2">
+                                    <span class="text-sm text-gray-600">{{ package.duration }} Days</span>
+                                    <span class="text-primary font-bold">${{ package.price }}</span>
+                                </div>
+                                <a href="{% url 'package_detail' package.slug %}" class="block w-full bg-primary hover:bg-primary-light text-white py-2 rounded-lg transition duration-300 text-center mt-4">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p class="text-gray-600 text-center">No packages available for this destination.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Quick Facts -->
+                <div class="bg-white rounded-xl shadow-lg p-6 mt-8">
+                    <h3 class="text-xl font-bold mb-4">Quick Facts</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-map-marker-alt text-primary mr-2"></i>
+                            <span>Location: {{ destination.location }}</span>
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-clock text-primary mr-2"></i>
+                            <span>Time Zone: {{ destination.time_zone }}</span>
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-temperature-high text-primary mr-2"></i>
+                            <span>Climate: {{ destination.climate }}</span>
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-plane text-primary mr-2"></i>
+                            <span>Nearest Airport: {{ destination.nearest_airport }}</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="bg-white rounded-xl shadow-lg p-6 mt-8">
+                    <h3 class="text-xl font-bold mb-4">Need Help?</h3>
+                    <p class="text-gray-600 mb-4">Contact our travel experts for more information about {{ destination.name }}.</p>
+                    <a href="{% url 'contact' %}" class="block w-full bg-primary hover:bg-primary-light text-white py-2 rounded-lg transition duration-300 text-center">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

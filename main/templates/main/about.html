@@ -4,135 +4,144 @@
 
 {% block content %}
     <!-- About Hero Section -->
-    <header class="page-hero about-hero">
-        <div class="hero-content">
-            <h1>Our Story</h1>
-            <p>Crafting unforgettable African safari experiences since 2010</p>
+    <header class="relative h-[60vh] flex items-center justify-center bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1516426122078-c23e76319801');">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">Our Story</h1>
+            <p class="text-xl md:text-2xl">Crafting unforgettable African safari experiences since 2010</p>
         </div>
     </header>
 
     <!-- Company Overview -->
-    <section class="company-overview">
-        <div class="container">
-            <div class="overview-content">
-                <div class="overview-text">
-                    <h2>Welcome to Enurwa Epic Safaris</h2>
-                    <p class="lead">We are passionate about sharing the magic and wonder of African wildlife with travelers from around the world.</p>
-                    <p>Founded in 2010, Enurwa Epic Safaris has grown to become one of East Africa's most trusted safari operators. Our commitment to excellence, sustainability, and authentic experiences sets us apart in the industry.</p>
-                    <div class="company-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">10,000+</span>
-                            <span class="stat-label">Happy Clients</span>
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">Welcome to Enurwa Epic Safaris</h2>
+                    <p class="text-xl text-gray-600 mb-6">We are passionate about sharing the magic and wonder of African wildlife with travelers from around the world.</p>
+                    <p class="text-gray-600 mb-8">Founded in 2010, Enurwa Epic Safaris has grown to become one of East Africa's most trusted safari operators. Our commitment to excellence, sustainability, and authentic experiences sets us apart in the industry.</p>
+                    <div class="grid grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-accent mb-2">10,000+</div>
+                            <div class="text-gray-600">Happy Clients</div>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-number">500+</span>
-                            <span class="stat-label">Unique Safaris</span>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-accent mb-2">500+</div>
+                            <div class="text-gray-600">Unique Safaris</div>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-number">14</span>
-                            <span class="stat-label">Years Experience</span>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-accent mb-2">14</div>
+                            <div class="text-gray-600">Years Experience</div>
                         </div>
                     </div>
                 </div>
-                <div class="overview-image">
-                    <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801" alt="Safari Experience">
+                <div class="relative rounded-xl overflow-hidden shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801" alt="Safari Experience" class="w-full h-[500px] object-cover">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Our Values -->
-    <section class="our-values">
-        <div class="container">
-            <h2>Our Core Values</h2>
-            <div class="values-grid">
-                <div class="value-card">
-                    <i class="fas fa-heart"></i>
-                    <h3>Passion</h3>
-                    <p>We are deeply passionate about wildlife conservation and creating memorable safari experiences.</p>
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">Our Core Values</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center transform hover:scale-105 transition duration-300">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-heart text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Passion</h3>
+                    <p class="text-gray-600">We are deeply passionate about wildlife conservation and creating memorable safari experiences.</p>
                 </div>
-                <div class="value-card">
-                    <i class="fas fa-handshake"></i>
-                    <h3>Integrity</h3>
-                    <p>We operate with complete transparency and maintain the highest ethical standards.</p>
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center transform hover:scale-105 transition duration-300">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-handshake text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Integrity</h3>
+                    <p class="text-gray-600">We operate with complete transparency and maintain the highest ethical standards.</p>
                 </div>
-                <div class="value-card">
-                    <i class="fas fa-leaf"></i>
-                    <h3>Sustainability</h3>
-                    <p>We are committed to eco-friendly practices and supporting local communities.</p>
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center transform hover:scale-105 transition duration-300">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-leaf text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Sustainability</h3>
+                    <p class="text-gray-600">We are committed to eco-friendly practices and supporting local communities.</p>
                 </div>
-                <div class="value-card">
-                    <i class="fas fa-star"></i>
-                    <h3>Excellence</h3>
-                    <p>We strive for excellence in every aspect of our safari experiences.</p>
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center transform hover:scale-105 transition duration-300">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-star text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Excellence</h3>
+                    <p class="text-gray-600">We strive for excellence in every aspect of our safari experiences.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Team Section -->
-    <section class="our-team">
-        <div class="container">
-            <h2>Meet Our Team</h2>
-            <p class="section-subtitle">Experienced professionals dedicated to making your safari unforgettable</p>
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="https://images.unsplash.com/photo-1507152832244-10d45c7eda57" alt="Rolex Otieno">
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-gray-900 mb-4">Meet Our Team</h2>
+            <p class="text-xl text-center text-gray-600 mb-12">Experienced professionals dedicated to making your safari unforgettable</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                    <div class="relative h-64">
+                        <img src="https://images.unsplash.com/photo-1507152832244-10d45c7eda57" alt="Rolex Otieno" class="w-full h-full object-cover">
                     </div>
-                    <div class="member-info">
-                        <h3>Rolex Otieno</h3>
-                        <p class="position">Founder & CEO</p>
-                        <p class="bio">With over 20 years of experience in African wildlife conservation and safari operations, Rolex has built Enurwa Epic Safaris into one of East Africa's premier safari companies.</p>
-                        <div class="social-links">
-                            <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-1">Rolex Otieno</h3>
+                        <p class="text-accent font-medium mb-4">Founder & CEO</p>
+                        <p class="text-gray-600 mb-4">With over 20 years of experience in African wildlife conservation and safari operations, Rolex has built Enurwa Epic Safaris into one of East Africa's premier safari companies.</p>
+                        <div class="flex space-x-4 text-accent">
+                            <a href="#" class="hover:text-accent-light transition-colors duration-300"><i class="fab fa-linkedin text-xl"></i></a>
+                            <a href="#" class="hover:text-accent-light transition-colors duration-300"><i class="fab fa-twitter text-xl"></i></a>
+                            <a href="#" class="hover:text-accent-light transition-colors duration-300"><i class="fab fa-instagram text-xl"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="https://images.unsplash.com/photo-1589156280159-27698a70f29e" alt="Sarah Kimani">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                    <div class="relative h-64">
+                        <img src="https://images.unsplash.com/photo-1589156280159-27698a70f29e" alt="Sarah Kimani" class="w-full h-full object-cover">
                     </div>
-                    <div class="member-info">
-                        <h3>Sarah Kimani</h3>
-                        <p class="position">Head of Operations</p>
-                        <p class="bio">Expert in safari logistics and customer experience with 15 years in the tourism industry.</p>
-                        <div class="social-links">
-                            <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-1">Sarah Kimani</h3>
+                        <p class="text-accent font-medium mb-4">Head of Operations</p>
+                        <p class="text-gray-600 mb-4">Expert in safari logistics and customer experience with 15 years in the tourism industry.</p>
+                        <div class="flex space-x-4 text-accent">
+                            <a href="#" class="hover:text-accent-light transition-colors duration-300"><i class="fab fa-linkedin text-xl"></i></a>
+                            <a href="#" class="hover:text-accent-light transition-colors duration-300"><i class="fab fa-twitter text-xl"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f" alt="James Omondi">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                    <div class="relative h-64">
+                        <img src="https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f" alt="James Omondi" class="w-full h-full object-cover">
                     </div>
-                    <div class="member-info">
-                        <h3>James Omondi</h3>
-                        <p class="position">Lead Safari Guide</p>
-                        <p class="bio">Certified wildlife expert with extensive knowledge of East African fauna and flora.</p>
-                        <div class="social-links">
-                            <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-1">James Omondi</h3>
+                        <p class="text-accent font-medium mb-4">Lead Safari Guide</p>
+                        <p class="text-gray-600 mb-4">Certified wildlife expert with extensive knowledge of East African fauna and flora.</p>
+                        <div class="flex space-x-4 text-accent">
+                            <a href="#" class="hover:text-accent-light transition-colors duration-300"><i class="fab fa-linkedin text-xl"></i></a>
+                            <a href="#" class="hover:text-accent-light transition-colors duration-300"><i class="fab fa-instagram text-xl"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce" alt="Grace Muthoni">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                    <div class="relative h-64">
+                        <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce" alt="Grace Muthoni" class="w-full h-full object-cover">
                     </div>
-                    <div class="member-info">
-                        <h3>Grace Muthoni</h3>
-                        <p class="position">Conservation Director</p>
-                        <p class="bio">Passionate conservationist leading our wildlife protection and community initiatives.</p>
-                        <div class="social-links">
-                            <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-1">Grace Muthoni</h3>
+                        <p class="text-accent font-medium mb-4">Conservation Director</p>
+                        <p class="text-gray-600 mb-4">Passionate conservationist leading our wildlife protection and community initiatives.</p>
+                        <div class="flex space-x-4 text-accent">
+                            <a href="#" class="hover:text-accent-light transition-colors duration-300"><i class="fab fa-linkedin text-xl"></i></a>
+                            <a href="#" class="hover:text-accent-light transition-colors duration-300"><i class="fab fa-twitter text-xl"></i></a>
                         </div>
                     </div>
                 </div>
@@ -141,44 +150,55 @@
     </section>
 
     <!-- Conservation Section -->
-    <section class="conservation">
-        <div class="container">
-            <div class="conservation-content">
-                <div class="conservation-text">
-                    <h2>Our Commitment to Conservation</h2>
-                    <p>At Enurwa Epic Safaris, we believe in responsible tourism that contributes to wildlife conservation and community development.</p>
-                    <ul class="conservation-list">
-                        <li><i class="fas fa-check"></i> Supporting local wildlife conservation projects</li>
-                        <li><i class="fas fa-check"></i> Employing eco-friendly practices</li>
-                        <li><i class="fas fa-check"></i> Partnering with local communities</li>
-                        <li><i class="fas fa-check"></i> Promoting sustainable tourism</li>
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">Our Commitment to Conservation</h2>
+                    <p class="text-xl text-gray-600 mb-8">At Enurwa Epic Safaris, we believe in responsible tourism that contributes to wildlife conservation and community development.</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-check text-accent mr-3"></i>
+                            Supporting local wildlife conservation projects
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-check text-accent mr-3"></i>
+                            Employing eco-friendly practices
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-check text-accent mr-3"></i>
+                            Partnering with local communities
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-check text-accent mr-3"></i>
+                            Promoting sustainable tourism
+                        </li>
                     </ul>
-                    <button class="learn-more-btn">Learn More About Our Initiatives</button>
+                    <button class="bg-accent hover:bg-accent-light text-white px-8 py-3 rounded-lg transition duration-300 transform hover:scale-105">
+                        Learn More About Our Initiatives
+                    </button>
                 </div>
-                <div class="conservation-image">
-                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e" alt="Conservation">
+                <div class="relative rounded-xl overflow-hidden shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e" alt="Conservation" class="w-full h-[500px] object-cover">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Awards & Recognition -->
-    <section class="awards">
-        <div class="container">
-            <h2>Awards & Recognition</h2>
-            <div class="awards-grid">
-                <div class="award-item">
-                    <img src="https://via.placeholder.com/100" alt="Award 1">
-                    <h3>Best Safari Operator 2023</h3>
-                    <p>World Travel Awards</p>
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">Awards & Recognition</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center transform hover:scale-105 transition duration-300">
+                    <div class="w-24 h-24 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <img src="https://via.placeholder.com/100" alt="Award 1" class="w-16 h-16 object-contain">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Best Safari Operator 2023</h3>
+                    <p class="text-gray-600">World Travel Awards</p>
                 </div>
-                <!-- Add more awards -->
+                <!-- Add more awards as needed -->
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <!-- Same footer content as other pages -->
-    </footer>
-    {% endblock %} 
+{% endblock %} 

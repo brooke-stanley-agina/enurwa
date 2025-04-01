@@ -1,238 +1,180 @@
 {% extends 'main/base.html' %}
+{% load static %}
 
-{% block title %}Enurwa Epic Safaris - Your Ultimate Safari Experience{% endblock %}
+{% block title %}Book Your Safari - Enurwa Epic Safaris{% endblock %}
 
 {% block content %}
-    <!-- Booking Modal -->
-    <div id="bookingModal" class="booking-modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            
-            <!-- Booking Process Steps -->
-            <section class="booking-steps">
-                <div class="container">
-                    <div class="steps-container">
-                        <div class="step active">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <h3>Choose Package</h3>
-                                <p>Select your safari package</p>
+    <!-- Hero Section -->
+    <header class="relative py-24 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1516426122078-c23e76319801');">
+        <div class="container mx-auto px-4">
+            <div class="text-center text-white">
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">Book Your Safari Adventure</h1>
+                <p class="text-xl md:text-2xl">Start planning your unforgettable African safari experience</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Booking Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Booking Form -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Personal Details</h2>
+                        <form action="{% url 'book' %}" method="POST" class="space-y-6">
+                            {% csrf_token %}
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-700 mb-2" for="first_name">First Name</label>
+                                    <input type="text" id="first_name" name="first_name" required
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-nature">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 mb-2" for="last_name">Last Name</label>
+                                    <input type="text" id="last_name" name="last_name" required
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-nature">
+                                </div>
                             </div>
-                        </div>
-                        <div class="step">
-                            <div class="step-number">2</div>
-                            <div class="step-content">
-                                <h3>Travel Details</h3>
-                                <p>Fill in travel information</p>
+
+                            <div>
+                                <label class="block text-gray-700 mb-2" for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required
+                                       class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-nature">
                             </div>
-                        </div>
-                        <div class="step">
-                            <div class="step-number">3</div>
-                            <div class="step-content">
-                                <h3>Confirmation</h3>
-                                <p>Review and confirm</p>
+
+                            <div>
+                                <label class="block text-gray-700 mb-2" for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" required
+                                       class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-nature">
                             </div>
-                        </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-700 mb-2" for="arrival_date">Arrival Date</label>
+                                    <input type="date" id="arrival_date" name="arrival_date" required
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-nature">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 mb-2" for="departure_date">Departure Date</label>
+                                    <input type="date" id="departure_date" name="departure_date" required
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-nature">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-700 mb-2" for="adults">Number of Adults</label>
+                                    <input type="number" id="adults" name="adults" min="1" value="1" required
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-nature">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 mb-2" for="children">Number of Children</label>
+                                    <input type="number" id="children" name="children" min="0" value="0"
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-nature">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 mb-2" for="special_requests">Special Requests</label>
+                                <textarea id="special_requests" name="special_requests" rows="4"
+                                          class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-nature"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-nature hover:bg-nature-light text-white font-bold py-4 rounded-lg transition duration-300">
+                                Book Now
+                            </button>
+                        </form>
                     </div>
                 </div>
-            </section>
 
-            <!-- Booking Form Section -->
-            <section class="booking-form-section">
-                <div class="container">
-                    <form class="booking-form" id="bookingForm">
-                        <!-- Step 1: Package Selection -->
-                        <div class="form-step active" id="step1">
-                            <h2>Choose Your Safari Package</h2>
-                            <div class="package-selection">
-                                <div class="package-option">
-                                    <input type="radio" name="package" id="masai-mara" value="masai-mara">
-                                    <label for="masai-mara" class="package-card">
-                                        <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801" alt="Masai Mara">
-                                        <div class="package-info">
-                                            <h3>Masai Mara Safari</h3>
-                                            <p>5 Days | From $1,299</p>
-                                            <ul>
-                                                <li><i class="fas fa-check"></i> Game drives</li>
-                                                <li><i class="fas fa-check"></i> Luxury accommodation</li>
-                                                <li><i class="fas fa-check"></i> Professional guide</li>
-                                            </ul>
-                                        </div>
-                                    </label>
-                                </div>
-
-                                <div class="package-option">
-                                    <input type="radio" name="package" id="serengeti" value="serengeti">
-                                    <label for="serengeti" class="package-card">
-                                        <img src="https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5" alt="Serengeti">
-                                        <div class="package-info">
-                                            <h3>Serengeti Migration</h3>
-                                            <p>7 Days | From $2,499</p>
-                                            <ul>
-                                                <li><i class="fas fa-check"></i> Migration viewing</li>
-                                                <li><i class="fas fa-check"></i> Balloon safari</li>
-                                                <li><i class="fas fa-check"></i> All-inclusive</li>
-                                            </ul>
-                                        </div>
-                                    </label>
-                                </div>
-
-                                <div class="package-option">
-                                    <input type="radio" name="package" id="custom" value="custom">
-                                    <label for="custom" class="package-card custom">
-                                        <div class="package-info">
-                                            <i class="fas fa-plus-circle"></i>
-                                            <h3>Custom Safari</h3>
-                                            <p>Create your own itinerary</p>
-                                        </div>
-                                    </label>
-                                </div>
+                <!-- Booking Summary -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-xl shadow-lg p-8 sticky top-8">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-900">Selected Package</h3>
+                        <div class="mb-6">
+                            <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801" alt="Safari Package" class="w-full h-48 object-cover rounded-lg mb-4">
+                            <h4 class="text-xl font-bold text-gray-900 mb-2">Masai Mara Wildebeest Migration Special</h4>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-xl text-gray-400 line-through">$599</span>
+                                <span class="text-2xl font-bold text-nature">$479</span>
+                                <span class="bg-nature text-white text-sm font-bold px-2 py-1 rounded-full">20% OFF</span>
                             </div>
-                            <div class="form-navigation">
-                                <button type="button" class="next-btn" onclick="nextStep(1)">Continue to Travel Details</button>
+                            <div class="space-y-2 text-gray-600">
+                                <p><i class="fas fa-calendar-alt mr-2"></i> 5 Days, 4 Nights</p>
+                                <p><i class="fas fa-users mr-2"></i> Up to 6 people</p>
+                                <p><i class="fas fa-map-marker-alt mr-2"></i> Masai Mara, Kenya</p>
                             </div>
                         </div>
 
-                        <!-- Step 2: Travel Details -->
-                        <div class="form-step" id="step2">
-                            <h2>Travel Details</h2>
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label for="travel-date">Preferred Travel Date</label>
-                                    <input type="date" id="travel-date" name="travel-date" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="duration">Duration (Days)</label>
-                                    <select id="duration" name="duration" required>
-                                        <option value="">Select duration</option>
-                                        <option value="3">3 Days</option>
-                                        <option value="5">5 Days</option>
-                                        <option value="7">7 Days</option>
-                                        <option value="10">10 Days</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="adults">Number of Adults</label>
-                                    <input type="number" id="adults" name="adults" min="1" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="children">Number of Children</label>
-                                    <input type="number" id="children" name="children" min="0">
-                                </div>
-                                <div class="form-group full-width">
-                                    <label for="special-requests">Special Requests</label>
-                                    <textarea id="special-requests" name="special-requests" rows="4"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-navigation">
-                                <button type="button" class="prev-btn" onclick="prevStep(2)">Back</button>
-                                <button type="button" class="next-btn" onclick="nextStep(2)">Continue to Confirmation</button>
-                            </div>
+                        <div class="border-t border-gray-200 pt-6">
+                            <h4 class="text-lg font-bold text-gray-900 mb-4">What's Included:</h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-nature mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Accommodation
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-nature mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    All meals
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-nature mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Game drives
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-nature mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Professional guide
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-nature mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Park fees
+                                </li>
+                            </ul>
                         </div>
-
-                        <!-- Step 3: Confirmation -->
-                        <div class="form-step" id="step3">
-                            <h2>Confirm Your Booking</h2>
-                            <div class="booking-summary">
-                                <h3>Booking Summary</h3>
-                                <div class="summary-details">
-                                    <div class="summary-item">
-                                        <span>Selected Package:</span>
-                                        <span id="package-name">Masai Mara Safari</span>
-                                    </div>
-                                    <div class="summary-item">
-                                        <span>Travel Date:</span>
-                                        <span id="travel-date-summary">July 15, 2024</span>
-                                    </div>
-                                    <div class="summary-item">
-                                        <span>Duration:</span>
-                                        <span id="duration-summary">5 Days</span>
-                                    </div>
-                                    <div class="summary-item">
-                                        <span>Number of Travelers:</span>
-                                        <span id="travelers-summary">2 Adults, 1 Child</span>
-                                    </div>
-                                    <div class="summary-item total">
-                                        <span>Estimated Total:</span>
-                                        <span id="total-amount">$2,598</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-navigation">
-                                <button type="button" class="prev-btn" onclick="prevStep(3)">Back</button>
-                                <button type="submit" class="submit-btn">Confirm Booking</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </section>
-        </div>
-    </div>
-
-    <!-- Why Book With Us -->
-    <section class="booking-features">
-        <div class="container">
-            <h2>Why Book With Us</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>Secure Booking</h3>
-                    <p>Safe and secure payment processing</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-hand-holding-usd"></i>
-                    <h3>Best Price Guarantee</h3>
-                    <p>We match any comparable price</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h3>Flexible Scheduling</h3>
-                    <p>Free date changes up to 30 days before</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-headset"></i>
-                    <h3>24/7 Support</h3>
-                    <p>Always here to help you</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <!-- Same footer content as other pages -->
-    </footer>
-   
-
-    <script>
-        // Booking form navigation
-        function nextStep(currentStep) {
-            document.querySelector(`#step${currentStep}`).classList.remove('active');
-            document.querySelector(`#step${currentStep + 1}`).classList.add('active');
-            updateSteps(currentStep + 1);
-        }
-
-        function prevStep(currentStep) {
-            document.querySelector(`#step${currentStep}`).classList.remove('active');
-            document.querySelector(`#step${currentStep - 1}`).classList.add('active');
-            updateSteps(currentStep - 1);
-        }
-
-        function updateSteps(activeStep) {
-            document.querySelectorAll('.step').forEach((step, index) => {
-                if (index + 1 <= activeStep) {
-                    step.classList.add('active');
-                } else {
-                    step.classList.remove('active');
-                }
-            });
-        }
-
-        // Form submission
-        document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Add your form submission logic here
-            alert('Booking submitted successfully!');
-        });
-    </script>
-     {% endblock %}
+    <!-- Why Book With Us -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-900">Why Book With Us</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-nature rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Secure Booking</h3>
+                    <p class="text-gray-600">Your payment and personal information are protected by secure encryption</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-nature rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-dollar-sign text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Best Price Guarantee</h3>
+                    <p class="text-gray-600">We offer competitive prices and match any comparable safari package</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-nature rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-headset text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">24/7 Support</h3>
+                    <p class="text-gray-600">Our team is available around the clock to assist you with any queries</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

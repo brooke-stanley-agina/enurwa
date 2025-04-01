@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="50" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background Circle -->
+    <circle cx="25" cy="25" r="20" fill="#4CAF50"/>
+    
+    <!-- Safari Icon -->
+    <path d="M15 25C15 19.4772 19.4772 15 25 15C30.5228 15 35 19.4772 35 25C35 30.5228 30.5228 35 25 35C19.4772 35 15 30.5228 15 25Z" stroke="white" stroke-width="2"/>
+    <path d="M25 15L35 35M25 15L15 35" stroke="white" stroke-width="2"/>
+    
+    <!-- Text -->
+    <text x="50" y="32" font-family="Arial" font-size="24" font-weight="bold" fill="#333333">
+        Enurwa Epic Safaris
+    </text>
+</svg> 

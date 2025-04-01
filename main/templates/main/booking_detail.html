@@ -1,0 +1,113 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Booking Details - Enurwa Epic Safaris{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative py-20 bg-cover bg-center" style="background-image: url('{{ booking.package.images.first.image.url }}');">
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="relative z-10 container mx-auto px-4 text-center text-white">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Booking Details</h1>
+        <p class="text-xl max-w-2xl mx-auto">Your safari adventure awaits!</p>
+    </div>
+</section>
+
+<!-- Booking Details -->
+<section class="py-16">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+            <!-- Booking Status -->
+            <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold">Booking #{{ booking.id }}</h2>
+                    <span class="px-4 py-2 rounded-full text-sm font-medium
+                        {% if booking.status == 'pending' %}bg-yellow-100 text-yellow-800
+                        {% elif booking.status == 'confirmed' %}bg-green-100 text-green-800
+                        {% elif booking.status == 'cancelled' %}bg-red-100 text-red-800
+                        {% else %}bg-gray-100 text-gray-800{% endif %}">
+                        {{ booking.get_status_display }}
+                    </span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Package</h3>
+                        <p class="text-gray-600">{{ booking.package.name }}</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Destination</h3>
+                        <p class="text-gray-600">{{ booking.package.destination.name }}</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Start Date</h3>
+                        <p class="text-gray-600">{{ booking.start_date|date:"F j, Y" }}</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Duration</h3>
+                        <p class="text-gray-600">{{ booking.package.duration }} Days</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Number of People</h3>
+                        <p class="text-gray-600">{{ booking.num_people }}</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Total Price</h3>
+                        <p class="text-2xl font-bold text-primary">${{ booking.total_price }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package Information -->
+            <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                <h2 class="text-2xl font-bold mb-4">Package Information</h2>
+                <div class="prose max-w-none">
+                    <p class="text-gray-600 mb-6">{{ booking.package.description }}</p>
+                    
+                    <h3 class="text-xl font-bold mb-3">Itinerary</h3>
+                    <div class="text-gray-600 mb-6">{{ booking.package.itinerary|safe }}</div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3">What's Included</h3>
+                            <ul class="space-y-2">
+                                {% for item in booking.package.inclusions.split %}
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-primary mr-2"></i>
+                                    {{ item }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3">What's Not Included</h3>
+                            <ul class="space-y-2">
+                                {% for item in booking.package.exclusions.split %}
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-times text-red-500 mr-2"></i>
+                                    {{ item }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex justify-center space-x-4">
+                {% if booking.status == 'pending' %}
+                <form action="{% url 'booking_cancel' booking.id %}" method="POST" class="inline">
+                    {% csrf_token %}
+                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg transition duration-300">
+                        Cancel Booking
+                    </button>
+                </form>
+                {% endif %}
+                <a href="{% url 'packages' %}" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg transition duration-300">
+                    View All Packages
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 
