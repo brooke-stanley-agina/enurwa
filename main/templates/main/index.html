@@ -65,7 +65,9 @@
                 {% for package in featured_packages %}
                 <div class="relative bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
                     <div class="absolute top-4 right-4 bg-green-600 text-white px-4 py-1 rounded-full text-sm font-bold">Featured</div>
-                    {% if package.image %}
+                    {% if package.images.first %}
+                        <img src="{{ package.images.first.image.url }}" alt="{{ package.name }}" class="w-full h-64 object-cover">
+                    {% elif package.image %}
                         <img src="{{ package.image.url }}" alt="{{ package.name }}" class="w-full h-64 object-cover">
                     {% else %}
                         <div class="w-full h-64 bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center">
