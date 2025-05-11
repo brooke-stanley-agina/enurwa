@@ -2887,3 +2887,72 @@ body.modal-open {
         padding: 1rem;
     }
 } 
+
+/* WhatsApp Float Button */
+.whatsapp-float {
+    position: fixed;
+    width: auto;
+    height: auto;
+    padding: 12px 20px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #FFF !important;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 16px;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    border: 2px solid #fff;
+}
+
+.whatsapp-float:hover {
+    background-color: #128C7E;
+    color: #FFF !important;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+}
+
+.whatsapp-float i {
+    font-size: 24px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Mobile styles */
+@media screen and (max-width: 767px) {
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        padding: 0;
+        justify-content: center;
+        border-radius: 50%;
+    }
+    
+    .whatsapp-float span {
+        display: none;
+    }
+    
+    .whatsapp-float i {
+        font-size: 28px;
+        margin: 0;
+    }
+}

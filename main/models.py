@@ -40,6 +40,22 @@ class TourCategory(models.Model):
     def __str__(self):
         return self.name
 
+class DayItinerary(models.Model):
+    package = models.ForeignKey('Package', related_name='daily_itinerary', on_delete=models.CASCADE)
+    day_number = models.PositiveIntegerField()
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    accommodation = models.CharField(max_length=200)
+    meals = models.CharField(max_length=200, help_text="e.g., 'Breakfast, Lunch, Dinner'")
+    activities = models.TextField(help_text="List of activities for the day")
+    
+    class Meta:
+        ordering = ['day_number']
+        verbose_name_plural = 'Day Itineraries'
+    
+    def __str__(self):
+        return f"{self.package.name} - Day {self.day_number}: {self.title}"
+
 class Package(models.Model):
     TOUR_TYPES = [
         ('adventure', 'Adventure'),
@@ -55,9 +71,8 @@ class Package(models.Model):
     category = models.ForeignKey(TourCategory, on_delete=models.SET_NULL, null=True)
     tour_type = models.CharField(max_length=20, choices=TOUR_TYPES)
     description = models.TextField()
-    itinerary = models.TextField()
+    overview = models.TextField(help_text="A brief overview of the package", blank=True, null=True)
     duration = models.PositiveIntegerField(help_text="Duration in days")
-    price = models.DecimalField(max_digits=10, decimal_places=2)
     max_group_size = models.PositiveIntegerField(default=6, help_text="Maximum number of people allowed in a group")
     featured = models.BooleanField(default=False)
     inclusions = models.TextField()
@@ -81,17 +96,37 @@ class Booking(models.Model):
         ('completed', 'Completed'),
     ]
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    package = models.ForeignKey(Package, on_delete=models.CASCADE)
+    # Use the same tour types as Package model
+    PACKAGE_TYPE_CHOICES = Package.TOUR_TYPES
+
+    # User and Package
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    package = models.ForeignKey(Package, on_delete=models.CASCADE, null=True, blank=True)
+    
+    # Contact Information
+    full_name = models.CharField(max_length=200, null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
+    phone = models.CharField(max_length=20, null=True, blank=True)
+    country = models.CharField(max_length=100, null=True, blank=True)
+    
+    # Booking Details
     booking_date = models.DateTimeField(auto_now_add=True)
-    travel_date = models.DateField()
-    number_of_people = models.PositiveIntegerField()
-    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    start_date = models.DateField(default='2025-05-10')
+    end_date = models.DateField(default='2025-05-10')
+    adults = models.PositiveIntegerField(default=1)
+    children = models.PositiveIntegerField(default=0)
+    preferred_package_type = models.CharField(max_length=20, choices=PACKAGE_TYPE_CHOICES)
+    special_requirements = models.TextField(blank=True)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
-    special_requests = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ['-booking_date']
 
     def __str__(self):
-        return f"Booking {self.id} - {self.user.username}"
+        user_str = self.user.username if self.user else 'Anonymous'
+        package_str = self.package.name if self.package else 'No Package'
+        return f"Booking by {user_str} for {package_str}"
 
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -101,7 +136,9 @@ class Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Review by {self.user.username} for {self.package.name}"
+        user_str = self.user.username if self.user else 'Anonymous'
+        package_str = self.package.name if self.package else 'No Package'
+        return f"Review by {user_str} for {package_str}"
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -198,7 +235,9 @@ class BlogComment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'Comment by {self.author.username} on {self.blog.title}'
+        author_str = self.author.username if self.author else 'Anonymous'
+        blog_str = self.blog.title if self.blog else 'No Blog'
+        return f'Comment by {author_str} on {blog_str}'
 
     class Meta:
         ordering = ['-created_at']

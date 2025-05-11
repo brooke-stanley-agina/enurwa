@@ -2,6 +2,12 @@ from django.conf import settings
 from django.db.models import Avg
 from .models import Booking, Package, UserProfile, Testimonial
 
+def package_types(request):
+    """Context processor to provide package types to all templates"""
+    return {
+        'package_types': Package.TOUR_TYPES
+    }
+
 def google_maps_api_key(request):
     return {
         'GOOGLE_MAPS_API_KEY': settings.GOOGLE_MAPS_API_KEY

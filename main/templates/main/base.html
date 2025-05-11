@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Enurwa Epic Safaris{% endblock %}</title>
+    <title>{% block title %}Emurwa Epic Safaris{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <script>
         tailwind.config = {
             theme: {
@@ -43,7 +45,7 @@
             <div class="flex justify-between items-center h-16">
                 <div class="flex-shrink-0">
                     <a href="{% url 'home' %}">
-                        <img src="{% static 'images/1.png' %}" alt="Enurwa Epic Safaris" class="h-12 w-auto transition-transform duration-300 hover:scale-105">
+                        <img src="{% static 'images/1.png' %}" alt="Emurwa Epic Safaris" class="h-12 w-auto transition-transform duration-300 hover:scale-105">
                     </a>
                 </div>
                 
@@ -89,7 +91,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <img src="{% static 'images/1.png' %}" alt="Enurwa Epic Safaris" class="h-12 w-auto mb-4">
+                    <img src="{% static 'images/1.png' %}" alt="Emurwa Epic Safaris" class="h-12 w-auto mb-4">
                     <p class="text-gray-300">Experience the magic of African wildlife with our expertly curated safari experiences.</p>
                 </div>
                 <div>
@@ -105,7 +107,7 @@
                     <h3 class="text-xl font-bold mb-4">Contact</h3>
                     <ul class="space-y-2 text-gray-300">
                         <li><i class="fas fa-phone mr-2"></i> +254 123 456 789</li>
-                        <li><i class="fas fa-envelope mr-2"></i> info@enurwaepicsafaris.com</li>
+                        <li><i class="fas fa-envelope mr-2"></i> info@emurwaepicsafaris.com</li>
                         <li><i class="fas fa-map-marker-alt mr-2"></i> Nairobi, Kenya</li>
                     </ul>
                 </div>
@@ -128,10 +130,19 @@
                 </div>
             </div>
             <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-300">
-                <p>&copy; {% now "Y" %} Enurwa Epic Safaris. All rights reserved.</p>
+                <p>&copy; {% now "Y" %} Emurwa Epic Safaris. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/254722753322" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+        <span>Chat with us</span>
+    </a>
+
+    <!-- Tidio Chat Bot -->
+    <script src="//code.tidio.co/your_tidio_key.js" async></script>
 
     <!-- Mobile Menu Script -->
     <script>
@@ -143,5 +154,159 @@
         });
     </script>
     {% block extra_js %}{% endblock %}
+
+    <!-- Trip Planning Chat Interface -->
+    <div id="trip-planner" class="fixed left-4 bottom-4 z-50">
+        <!-- Chat Trigger Button -->
+        <button id="chat-trigger" class="bg-primary hover:bg-primary-light text-white p-4 rounded-full shadow-lg transition duration-300 mb-4">
+            <i class="fas fa-comments text-2xl"></i>
+        </button>
+
+        <!-- Chat Interface -->
+        <div id="chat-interface" class="hidden bg-white rounded-lg shadow-xl w-80 md:w-96">
+            <div class="p-4 bg-primary text-white rounded-t-lg flex justify-between items-center">
+                <h3 class="font-bold">Let's Plan Your Trip</h3>
+                <button id="close-chat" class="text-white hover:text-gray-200 transition duration-300">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-4 space-y-4">
+                <div class="space-y-3">
+                    <div class="flex items-start space-x-2">
+                        <div class="bg-primary/10 rounded-lg p-3 max-w-[80%]">
+                            <p class="text-gray-800">Hello! I'm here to help you plan your perfect safari. Please fill in some details about your trip.</p>
+                        </div>
+                    </div>
+                </div>
+                <form id="trip-planning-form" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Travel Dates</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="date" name="start_date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" required>
+                            <input type="date" name="end_date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Number of Travelers</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-gray-500">Adults</label>
+                                <input type="number" name="adults" min="1" value="2" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-500">Children</label>
+                                <input type="number" name="children" min="0" value="0" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 text-sm font-medium mb-2" for="package_type">Preferred Package</label>
+                        <select name="package_type" id="package_type" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                            {% for type_code, type_name in package_types %}
+                            <option value="{{ type_code }}">{{ type_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Special Requirements</label>
+                    <textarea name="requirements" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" placeholder="Any dietary restrictions, accessibility needs, or specific interests?"></textarea>
+                    <button type="submit" class="w-full bg-primary hover:bg-primary-light text-white font-medium py-2 px-4 rounded-md transition duration-300">Start Planning</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trip Planner Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatTrigger = document.getElementById('chat-trigger');
+            const chatInterface = document.getElementById('chat-interface');
+            const closeChat = document.getElementById('close-chat');
+            const tripPlanningForm = document.getElementById('trip-planning-form');
+
+            chatTrigger.addEventListener('click', () => {
+                chatInterface.classList.toggle('hidden');
+            });
+
+            closeChat.addEventListener('click', () => {
+                chatInterface.classList.add('hidden');
+            });
+
+            // Form validation
+            function validateForm() {
+                const startDate = new Date(tripPlanningForm.start_date.value);
+                const endDate = new Date(tripPlanningForm.end_date.value);
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                if (startDate < today) {
+                    alert('Start date cannot be in the past');
+                    return false;
+                }
+                if (endDate < startDate) {
+                    alert('End date must be after start date');
+                    return false;
+                }
+                if (tripPlanningForm.adults.value < 1) {
+                    alert('At least one adult is required');
+                    return false;
+                }
+                return true;
+            }
+
+            tripPlanningForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (!validateForm()) return;
+
+                const formData = new FormData(tripPlanningForm);
+                const data = {
+                    start_date: formData.get('start_date'),
+                    end_date: formData.get('end_date'),
+                    adults: parseInt(formData.get('adults')),
+                    children: parseInt(formData.get('children') || '0'),
+                    preferred_package_type: formData.get('package_type'),
+                    requirements: formData.get('requirements')
+                };
+
+                try {
+                    console.log('Sending data:', data);
+                    const response = await fetch('{% url "booking_create" %}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    const result = await response.json();
+                    console.log('Response:', result);
+
+                    if (response.ok) {
+                        alert('Thank you! Your trip planning request has been submitted successfully. We will contact you shortly with a personalized safari plan.');
+                        tripPlanningForm.reset();
+                        chatInterface.classList.add('hidden');
+                    } else {
+                        throw new Error(result.error || 'Failed to submit form');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Sorry, there was an error submitting your request: ' + error.message);
+                }
+            });
+
+            // Set minimum date for date inputs
+            const today = new Date().toISOString().split('T')[0];
+            tripPlanningForm.start_date.min = today;
+            tripPlanningForm.end_date.min = today;
+
+            // Update end date minimum when start date changes
+            tripPlanningForm.start_date.addEventListener('change', (e) => {
+                tripPlanningForm.end_date.min = e.target.value;
+                if (tripPlanningForm.end_date.value && tripPlanningForm.end_date.value < e.target.value) {
+                    tripPlanningForm.end_date.value = e.target.value;
+                }
+            });
+        });
+    </script>
 </body>
 </html>

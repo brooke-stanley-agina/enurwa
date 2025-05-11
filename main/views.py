@@ -2,21 +2,22 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.http import JsonResponse
 from .models import Destination, Package, Testimonial, Booking, Contact, PackageImage, Review, UserProfile, Safari, TourCategory, Blog, BlogComment
 from .forms import BookingForm, BlogForm
 from django.utils.text import slugify
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
 
 def home(request):
-    featured_destinations = Destination.objects.filter(featured=True)[:3]
-    featured_packages = Package.objects.filter(featured=True)[:3]
-    testimonials = Testimonial.objects.filter(is_active=True)[:3]
+    featured_destinations = Destination.objects.filter(featured=True)[:6]
+    testimonials = Testimonial.objects.all()[:3]
     return render(request, 'main/index.html', {
         'featured_destinations': featured_destinations,
-        'featured_packages': featured_packages,
-        'testimonials': testimonials
+        'testimonials': testimonials,
+        'package_types': Package.TOUR_TYPES
     })
 
 def destination_detail(request, slug):
@@ -28,12 +29,23 @@ def destination_detail(request, slug):
     })
 
 def package_detail(request, slug):
-    package = get_object_or_404(Package, slug=slug)
-    related_packages = Package.objects.filter(destination=package.destination).exclude(id=package.id)[:3]
+    package = get_object_or_404(
+        Package.objects.prefetch_related('daily_itinerary', 'images'),
+        slug=slug
+    )
+    related_packages = Package.objects.filter(
+        destination=package.destination
+    ).exclude(
+        id=package.id
+    ).prefetch_related(
+        'images'
+    )[:3]
+    
     return render(request, 'main/package_detail.html', {
         'package': package,
         'related_packages': related_packages,
-        'today': timezone.now().date()
+        'today': timezone.now().date(),
+        'package_types': Package.TOUR_TYPES
     })
 
 def about(request):
@@ -49,25 +61,22 @@ def destinations(request):
     })
 
 def packages(request):
-    packages = Package.objects.all()
+    packages = Package.objects.all().prefetch_related('daily_itinerary')
     tour_type = request.GET.get('tour_type')
     featured = request.GET.get('featured')
-    price_range = request.GET.get('price_range')
+    destination = request.GET.get('destination')
 
     if tour_type:
         packages = packages.filter(tour_type=tour_type)
     if featured:
         packages = packages.filter(featured=True)
-    if price_range:
-        if price_range == 'budget':
-            packages = packages.filter(price__lte=300)
-        elif price_range == 'mid':
-            packages = packages.filter(price__gt=300, price__lte=600)
-        elif price_range == 'luxury':
-            packages = packages.filter(price__gt=600)
+    if destination:
+        packages = packages.filter(destination__slug=destination)
 
     return render(request, 'main/packages.html', {
-        'packages': packages
+        'packages': packages,
+        'tour_types': Package.TOUR_TYPES,
+        'destinations': Destination.objects.all()
     })
 
 def blog(request):
@@ -95,46 +104,91 @@ def book(request):
         package_id = request.POST.get('package')
         package = Package.objects.get(id=package_id)
         booking = Booking.objects.create(
-            name=request.POST.get('name'),
-            email=request.POST.get('email'),
-            phone=request.POST.get('phone'),
+            user=request.user,
             package=package,
-            travel_date=request.POST.get('travel_date'),
-            number_of_people=request.POST.get('number_of_people')
+            start_date=request.POST.get('start_date'),
+            end_date=request.POST.get('end_date'),
+            adults=int(request.POST.get('adults', 1)),
+            children=int(request.POST.get('children', 0)),
+            accommodation_preference=request.POST.get('accommodation'),
+            special_requirements=request.POST.get('special_requirements', ''),
+            total_price=package.price * int(request.POST.get('adults', 1)),
+            status='pending'
         )
-        messages.success(request, 'Your booking has been received. We will contact you shortly!')
-        return redirect('book')
-    
-    packages = Package.objects.all()
-    return render(request, 'main/book.html', {
-        'packages': packages
-    })
+        messages.success(request, 'Your booking has been created successfully!')
+        return redirect('booking_detail', id=booking.id)
+    return render(request, 'main/book.html')
 
-@login_required
+import json
+
+@csrf_exempt
 def booking_create(request):
     if request.method == 'POST':
-        package = get_object_or_404(Package, id=request.POST.get('package'))
-        form = BookingForm(request.POST, package=package)
-        
-        if form.is_valid():
+        try:
+            # Try to get data from request body (API calls)
             try:
-                booking = form.save(commit=False)
-                booking.user = request.user
-                booking.total_price = package.price * booking.number_of_people
-                booking.save()
-                
-                messages.success(request, 'Your booking has been created successfully!')
-                return redirect('booking_detail', id=booking.id)
-            except Exception as e:
-                messages.error(request, 'Sorry, there was an error creating your booking. Please try again.')
-                return redirect('package_detail', slug=package.slug)
-        else:
-            for field, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, f"{field}: {error}")
+                data = json.loads(request.body)
+            except json.JSONDecodeError:
+                # If not JSON, use POST data (form submission)
+                data = request.POST
+
+            # Get the package
+            package_id = data.get('package')
+            if not package_id:
+                return JsonResponse({'error': 'Package ID is required'}, status=400)
+            
+            try:
+                package = Package.objects.get(id=package_id)
+            except Package.DoesNotExist:
+                return JsonResponse({'error': 'Invalid package ID'}, status=400)
+
+            # Validate required fields
+            required_fields = ['full_name', 'email', 'phone', 'country', 'start_date', 'end_date']
+            for field in required_fields:
+                if not data.get(field):
+                    if request.content_type == 'application/json':
+                        return JsonResponse({'error': f'Missing required field: {field}'}, status=400)
+                    messages.error(request, f'Please provide your {field.replace("_", " ").title()}')
+                    return redirect('package_detail', slug=package.slug)
+
+            # Create the booking
+            booking = Booking.objects.create(
+                user=request.user if request.user.is_authenticated else None,
+                package=package,
+                # Contact Information
+                full_name=data.get('full_name'),
+                email=data.get('email'),
+                phone=data.get('phone'),
+                country=data.get('country'),
+                # Trip Details
+                start_date=data.get('start_date'),
+                end_date=data.get('end_date'),
+                adults=int(data.get('adults', 1)),
+                children=int(data.get('children', 0)),
+                preferred_package_type=data.get('preferred_package_type'),
+                special_requirements=data.get('special_requests', ''),
+                status='pending'
+            )
+
+            # Return JSON response for API calls
+            if request.content_type == 'application/json':
+                return JsonResponse({
+                    'message': 'Booking request submitted successfully',
+                    'booking_id': booking.id
+                })
+            
+            # Redirect for form submissions
+            messages.success(request, 'Thank you for your booking request! We will contact you shortly at ' + data.get('email'))
             return redirect('package_detail', slug=package.slug)
-    
-    return redirect('home')
+
+        except Exception as e:
+            print('Error creating booking:', str(e))
+            if request.content_type == 'application/json':
+                return JsonResponse({'error': str(e)}, status=400)
+            messages.error(request, 'There was an error processing your booking. Please try again.')
+            return redirect('package_detail', slug=package.slug)
+
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 @login_required
 def booking_detail(request, id):

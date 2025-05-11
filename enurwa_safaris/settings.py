@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '_2y#27vr*_81mj0di$-3_$^yio19o=6@0cxx7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['enurwa.onrender.com', '.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['emurwa.onrender.com', '.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -71,6 +71,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'main.context_processors.google_maps_api_key',
+                'main.context_processors.admin_stats',
+                'main.context_processors.package_types',
             ],
         },
     },
@@ -165,17 +168,17 @@ GOOGLE_MAPS_API_KEY = 'AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg'  # Replace with 
 # Jazzmin Settings
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
-    "site_title": "Enurwa Epic Safaris Admin",
+    "site_title": "Emurwa Epic Safaris Admin",
     # Title on the login screen (19 chars max) (Will default to current_admin_site.site_header if absent or None)
-    "site_header": "Enurwa Epic Safaris",
+    "site_header": "Emurwa Epic Safaris",
     # Title on the brand (19 chars max) (Will default to current_admin_site.site_header if absent or None)
-    "site_brand": "Enurwa Epic Safaris",
+    "site_brand": "Emurwa Epic Safaris",
     # Logo to use for your site, must be present in static files, used for brand on top left
     "site_logo": "images/logo.svg",
     # Welcome text on the login screen
-    "welcome_sign": "Welcome to Enurwa Epic Safaris Admin",
+    "welcome_sign": "Welcome to Emurwa Epic Safaris Admin",
     # Copyright on the footer
-    "copyright": "Enurwa Epic Safaris Ltd",
+    "copyright": "Emurwa Epic Safaris Ltd",
     # The model admin to search from the search bar, search bar omitted if excluded
     "search_model": "auth.User",
     # Field name on user model that contains avatar ImageField/URLField/Charfield or a callable that receives the user

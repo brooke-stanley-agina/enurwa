@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import (
-    Destination, Package, PackageImage, Booking, Review, UserProfile, Testimonial, Safari, TourCategory, Contact, Blog, BlogComment
+    Destination, Package, PackageImage, Booking, Review, UserProfile, Testimonial, Safari, 
+    TourCategory, Contact, Blog, BlogComment, DayItinerary
 )
 
 @admin.register(Destination)
@@ -26,12 +27,53 @@ class DestinationAdmin(admin.ModelAdmin):
     )
     readonly_fields = ('created_at', 'updated_at')
 
+class DayItineraryInline(admin.TabularInline):
+    model = DayItinerary
+    extra = 1
+    ordering = ['day_number']
+
 @admin.register(Package)
 class PackageAdmin(admin.ModelAdmin):
-    list_display = ('name', 'destination', 'tour_type', 'duration', 'price', 'featured')
-    list_filter = ('featured', 'tour_type', 'destination', 'created_at')
+    list_display = ('name', 'destination', 'tour_type', 'duration', 'featured')
+    list_filter = ('tour_type', 'destination', 'featured')
     search_fields = ('name', 'description')
     prepopulated_fields = {'slug': ('name',)}
+    inlines = [DayItineraryInline]
+    
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('name', 'slug', 'destination', 'category', 'tour_type')
+        }),
+        ('Package Details', {
+            'fields': ('overview', 'description', 'duration', 'max_group_size', 'featured')
+        }),
+        ('Package Inclusions/Exclusions', {
+            'fields': ('inclusions', 'exclusions')
+        })
+    )
+
+@admin.register(DayItinerary)
+class DayItineraryAdmin(admin.ModelAdmin):
+    list_display = ('day_title', 'package', 'day_number', 'accommodation', 'meals')
+    list_filter = ('package', 'accommodation')
+    search_fields = ('title', 'description', 'activities', 'package__name')
+    ordering = ['package', 'day_number']
+    
+    def day_title(self, obj):
+        return f'Day {obj.day_number}: {obj.title}'
+    day_title.short_description = 'Day Itinerary'
+    
+    fieldsets = (
+        ('Package Information', {
+            'fields': ('package', 'day_number', 'title')
+        }),
+        ('Day Details', {
+            'fields': ('description', 'activities')
+        }),
+        ('Accommodation & Meals', {
+            'fields': ('accommodation', 'meals')
+        })
+    )
 
 @admin.register(PackageImage)
 class PackageImageAdmin(admin.ModelAdmin):
@@ -40,10 +82,29 @@ class PackageImageAdmin(admin.ModelAdmin):
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('user', 'package', 'travel_date', 'number_of_people', 'total_price', 'status', 'booking_date')
-    list_filter = ('status', 'booking_date', 'travel_date')
-    search_fields = ('user__username', 'user__email', 'package__name')
-    readonly_fields = ('booking_date', 'total_price')
+    list_display = ('full_name', 'email', 'phone', 'package', 'start_date', 'total_guests', 'status')
+    list_filter = ('status', 'preferred_package_type', 'country')
+    search_fields = ('full_name', 'email', 'phone', 'package__name')
+    readonly_fields = ('booking_date',)
+
+    def total_guests(self, obj):
+        return obj.adults + obj.children
+    total_guests.short_description = 'Total Guests'
+
+    fieldsets = (
+        ('Contact Information', {
+            'fields': ('full_name', 'email', 'phone', 'country')
+        }),
+        ('Package Details', {
+            'fields': ('package', 'preferred_package_type')
+        }),
+        ('Trip Details', {
+            'fields': ('start_date', 'end_date', 'adults', 'children', 'special_requirements')
+        }),
+        ('Booking Status', {
+            'fields': ('status', 'total_price', 'booking_date')
+        })
+    )
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):

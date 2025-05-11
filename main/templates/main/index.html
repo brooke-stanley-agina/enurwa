@@ -1,7 +1,7 @@
 {% extends 'main/base.html' %}
 {% load custom_filters %}
 
-{% block title %}Enurwa Epic Safaris - Your Ultimate Safari Experience{% endblock %}
+{% block title %}Emurwa Epic Safaris - Your Ultimate Safari Experience{% endblock %}
 
 {% block content %}
     <!-- Hero Section -->
@@ -57,40 +57,22 @@
         </div>
     </section>
 
-    <!-- Special Offers -->
+
+
+    <!-- Let's Plan Your Trip -->
     <section class="py-20 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">Limited Time Offers</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {% for package in featured_packages %}
-                <div class="relative bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
-                    <div class="absolute top-4 right-4 bg-green-600 text-white px-4 py-1 rounded-full text-sm font-bold">Featured</div>
-                    {% if package.images.first %}
-                        <img src="{{ package.images.first.image.url }}" alt="{{ package.name }}" class="w-full h-64 object-cover">
-                    {% elif package.image %}
-                        <img src="{{ package.image.url }}" alt="{{ package.name }}" class="w-full h-64 object-cover">
-                    {% else %}
-                        <div class="w-full h-64 bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center">
-                            <div class="text-center">
-                                <i class="fas fa-suitcase text-4xl text-green-400 mb-2"></i>
-                                <p class="text-green-600 text-sm">No image available</p>
-                            </div>
-                        </div>
-                    {% endif %}
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-2 text-gray-900">{{ package.name }}</h3>
-                        <p class="text-gray-600 mb-4">{{ package.description|truncatewords:20 }}</p>
-                        <div class="flex items-center gap-2 mb-4">
-                            <span class="text-2xl font-bold text-nature">${{ package.price }}</span>
-                        </div>
-                        <a href="{% url 'package_detail' package.slug %}" class="block w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg transition duration-300 text-center">
-                            Book Now
-                        </a>
-                    </div>
-                </div>
-                {% empty %}
-                <div class="col-span-full text-center text-gray-600">
-                    <p>No featured packages available at the moment.</p>
+            <h2 class="text-4xl font-bold text-center mb-4 text-gray-900">Let's Plan Your Trip</h2>
+            <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">Choose your preferred package type and let us create an unforgettable safari experience for you</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                {% for type_code, type_name in package_types %}
+                <div class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition duration-300 border border-gray-100">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900 text-center">{{ type_name }}</h3>
+                    <p class="text-gray-600 text-center mb-6">Perfect for those seeking a {{ type_code|lower }} safari experience</p>
+                    <a href="{% url 'packages' %}?type={{ type_code }}" class="block w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg transition duration-300 text-center">
+                        View Packages <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
                 </div>
                 {% endfor %}
             </div>
@@ -100,7 +82,7 @@
     <!-- Why Choose Us -->
     <section class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-4 text-gray-900">Why Choose Enurwa Epic Safaris</h2>
+            <h2 class="text-4xl font-bold text-center mb-4 text-gray-900">Why Choose Emurwa Epic Safaris</h2>
             <p class="text-xl text-center text-gray-600 mb-16 max-w-3xl mx-auto">Experience the difference with our commitment to excellence and personalized service</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition duration-300">
