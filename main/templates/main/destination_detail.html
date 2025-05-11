@@ -62,9 +62,8 @@
                             <img src="{{ package.images.first.image.url }}" alt="{{ package.name }}" class="w-full h-32 object-cover">
                             <div class="p-4">
                                 <h4 class="font-semibold text-gray-900">{{ package.name }}</h4>
-                                <div class="flex justify-between items-center mt-2">
+                                <div class="mt-2">
                                     <span class="text-sm text-gray-600">{{ package.duration }} Days</span>
-                                    <span class="text-primary font-bold">${{ package.price }}</span>
                                 </div>
                                 <a href="{% url 'package_detail' package.slug %}" class="block w-full bg-primary hover:bg-primary-light text-white py-2 rounded-lg transition duration-300 text-center mt-4">
                                     View Details

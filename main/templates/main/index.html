@@ -40,9 +40,7 @@
                             <span><i class="fas fa-clock mr-1"></i> {{ destination.package_set.first.duration }}-{{ destination.package_set.last.duration }} Days</span>
                             <span><i class="fas fa-star text-yellow-400 mr-1"></i> 4.9</span>
                         </div>
-                        <p class="text-2xl font-bold text-nature mb-4">
-                            From ${{ destination.package_set.first.price }} <span class="text-sm text-gray-500">/person</span>
-                        </p>
+
                         <a href="{% url 'destination_detail' destination.slug %}" class="block w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg transition duration-300 text-center">
                             View Details <i class="fas fa-arrow-right ml-2"></i>
                         </a>
@@ -58,26 +56,6 @@
     </section>
 
 
-
-    <!-- Let's Plan Your Trip -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-4 text-gray-900">Let's Plan Your Trip</h2>
-            <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">Choose your preferred package type and let us create an unforgettable safari experience for you</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                {% for type_code, type_name in package_types %}
-                <div class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition duration-300 border border-gray-100">
-                    <h3 class="text-2xl font-bold mb-4 text-gray-900 text-center">{{ type_name }}</h3>
-                    <p class="text-gray-600 text-center mb-6">Perfect for those seeking a {{ type_code|lower }} safari experience</p>
-                    <a href="{% url 'packages' %}?type={{ type_code }}" class="block w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg transition duration-300 text-center">
-                        View Packages <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
 
     <!-- Why Choose Us -->
     <section class="py-20 bg-gray-50">
@@ -107,7 +85,7 @@
                         </svg>
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-gray-900 text-center">Best Value</h3>
-                    <p class="text-gray-600 text-center leading-relaxed">We offer competitive prices without compromising quality. Our packages include all essential services for a complete safari experience.</p>
+                    <p class="text-gray-600 text-center leading-relaxed">We ensure high-quality service and attention to detail in every aspect of your safari experience.</p>
                     <ul class="mt-4 space-y-2 text-gray-600">
                         <li class="flex items-center"><svg class="w-5 h-5 text-nature mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> All-inclusive packages</li>
                         <li class="flex items-center"><svg class="w-5 h-5 text-nature mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> No hidden fees</li>

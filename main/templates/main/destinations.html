@@ -50,9 +50,7 @@
                         <span><i class="fas fa-clock mr-1"></i> {{ destination.package_set.first.duration }}-{{ destination.package_set.last.duration }} Days</span>
                         <span><i class="fas fa-star text-yellow-400 mr-1"></i> 4.9</span>
                     </div>
-                    <p class="text-2xl font-bold text-primary mb-4">
-                        From ${{ destination.package_set.first.price }} <span class="text-sm text-gray-500">/person</span>
-                    </p>
+
                     <a href="{% url 'destination_detail' destination.slug %}" class="block w-full bg-primary hover:bg-primary-light text-white py-3 rounded-lg transition duration-300 text-center">
                         View Details <i class="fas fa-arrow-right ml-2"></i>
                     </a>
@@ -88,10 +86,10 @@
             </div>
             <div class="text-center">
                 <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-hand-holding-usd text-white text-2xl"></i>
+                    <i class="fas fa-camera text-white text-2xl"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-2">Best Value</h3>
-                <p class="text-gray-600">Competitive prices for premium safari experiences.</p>
+                <h3 class="text-xl font-bold mb-2">Unique Experiences</h3>
+                <p class="text-gray-600">Unforgettable moments and authentic safari adventures.</p>
             </div>
         </div>
     </div>

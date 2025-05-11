@@ -113,7 +113,7 @@ def book(request):
             children=int(request.POST.get('children', 0)),
             accommodation_preference=request.POST.get('accommodation'),
             special_requirements=request.POST.get('special_requirements', ''),
-            total_price=package.price * int(request.POST.get('adults', 1)),
+            total_price=0,  # Price will be determined after inquiry
             status='pending'
         )
         messages.success(request, 'Your booking has been created successfully!')
