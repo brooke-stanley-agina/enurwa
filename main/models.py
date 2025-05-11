@@ -75,6 +75,7 @@ class Package(models.Model):
     overview = models.TextField(help_text="A brief overview of the package", blank=True, null=True)
     duration = models.PositiveIntegerField(help_text="Duration in days")
     max_group_size = models.PositiveIntegerField(default=6, help_text="Maximum number of people allowed in a group")
+    price = models.DecimalField(max_digits=10, decimal_places=2, help_text="Price per person in USD", default=0)
     featured = models.BooleanField(default=False)
     inclusions = models.TextField()
     exclusions = models.TextField()
