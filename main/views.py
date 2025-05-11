@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
@@ -170,26 +171,6 @@ def booking_create(request):
                 status='pending'
             )
 
-            # Return JSON response for API calls
-            if request.content_type == 'application/json':
-                # Get existing booking IDs from cookies
-                booking_ids = request.COOKIES.get('booking_ids', '')
-                booking_id_list = booking_ids.split(',') if booking_ids else []
-                
-                # Add new booking ID
-                booking_id_list.append(str(booking.booking_id))
-                
-                # Create response
-                response = JsonResponse({
-                    'message': 'Booking request submitted successfully',
-                    'booking_id': booking.booking_id
-                })
-                
-                # Set cookie with updated booking IDs
-                response.set_cookie('booking_ids', ','.join(booking_id_list), max_age=365*24*60*60)  # 1 year expiry
-                
-                return response
-            
             # Get existing booking IDs from cookies
             booking_ids = request.COOKIES.get('booking_ids', '')
             booking_id_list = booking_ids.split(',') if booking_ids else []
@@ -197,13 +178,21 @@ def booking_create(request):
             # Add new booking ID
             booking_id_list.append(str(booking.booking_id))
             
-            # Create response
-            response = redirect('package_detail', slug=package.slug)
+            # Return JSON response for API calls
+            if request.content_type == 'application/json':
+                response = JsonResponse({
+                    'message': 'Booking request submitted successfully',
+                    'booking_id': booking.booking_id,
+                    'redirect_url': reverse('my_bookings')
+                })
+            else:
+                # Redirect to my bookings page
+                messages.success(request, 'Your booking request has been submitted successfully!')
+                response = redirect('my_bookings')
             
             # Set cookie with updated booking IDs
             response.set_cookie('booking_ids', ','.join(booking_id_list), max_age=365*24*60*60)  # 1 year expiry
             
-            messages.success(request, 'Thank you for your booking request! We will contact you shortly at ' + data.get('email'))
             return response
 
         except Exception as e:

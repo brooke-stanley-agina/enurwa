@@ -17,10 +17,12 @@
                 <div class="flex items-center">
                     {% if booking.status == 'pending' %}
                     <span class="px-4 py-1 rounded-full bg-yellow-100 text-yellow-800">Pending</span>
-                    {% elif booking.status == 'approved' %}
-                    <span class="px-4 py-1 rounded-full bg-green-100 text-green-800">Approved</span>
-                    {% elif booking.status == 'rejected' %}
-                    <span class="px-4 py-1 rounded-full bg-red-100 text-red-800">Rejected</span>
+                    {% elif booking.status == 'confirmed' %}
+                    <span class="px-4 py-1 rounded-full bg-green-100 text-green-800">Confirmed</span>
+                    {% elif booking.status == 'cancelled' %}
+                    <span class="px-4 py-1 rounded-full bg-red-100 text-red-800">Cancelled</span>
+                    {% elif booking.status == 'completed' %}
+                    <span class="px-4 py-1 rounded-full bg-blue-100 text-blue-800">Completed</span>
                     {% endif %}
                 </div>
             </div>
@@ -58,13 +60,17 @@
                 </div>
             </div>
 
-            {% if booking.status == 'approved' %}
+            {% if booking.status == 'confirmed' %}
             <div class="mt-6 p-4 bg-green-50 rounded-lg">
-                <p class="text-green-800">Your booking has been approved! We'll be in touch with further details soon.</p>
+                <p class="text-green-800">Your booking has been confirmed! We'll be in touch with further details soon.</p>
             </div>
-            {% elif booking.status == 'rejected' %}
+            {% elif booking.status == 'cancelled' %}
             <div class="mt-6 p-4 bg-red-50 rounded-lg">
-                <p class="text-red-800">Unfortunately, we couldn't accommodate your booking at this time. Please contact us for more information.</p>
+                <p class="text-red-800">Your booking has been cancelled. Please contact us if you have any questions.</p>
+            </div>
+            {% elif booking.status == 'completed' %}
+            <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                <p class="text-blue-800">Your safari experience has been completed. We hope you had a wonderful time!</p>
             </div>
             {% endif %}
         </div>
