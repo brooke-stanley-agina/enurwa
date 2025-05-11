@@ -19,18 +19,20 @@
         <!-- Filter Section -->
         <div class="mb-12">
             <div class="flex flex-wrap gap-4 justify-center">
-                <button class="px-6 py-2 rounded-full bg-primary text-white hover:bg-primary-light transition duration-300">
+                <a href="{% url 'packages' %}" 
+                   class="px-6 py-2 rounded-full {% if not request.GET.tour_type and not request.GET.featured %}bg-primary text-white{% else %}bg-white text-gray-700{% endif %} hover:bg-primary hover:text-white transition duration-300">
                     All Packages
-                </button>
-                <button class="px-6 py-2 rounded-full bg-white text-gray-700 hover:bg-gray-100 transition duration-300">
+                </a>
+                <a href="{% url 'packages' %}?featured=true" 
+                   class="px-6 py-2 rounded-full {% if request.GET.featured %}bg-primary text-white{% else %}bg-white text-gray-700{% endif %} hover:bg-primary hover:text-white transition duration-300">
                     Featured
-                </button>
-                <button class="px-6 py-2 rounded-full bg-white text-gray-700 hover:bg-gray-100 transition duration-300">
-                    Luxury
-                </button>
-                <button class="px-6 py-2 rounded-full bg-white text-gray-700 hover:bg-gray-100 transition duration-300">
-                    Budget
-                </button>
+                </a>
+                {% for type_code, type_name in tour_types %}
+                <a href="{% url 'packages' %}?tour_type={{ type_code }}" 
+                   class="px-6 py-2 rounded-full {% if request.GET.tour_type == type_code %}bg-primary text-white{% else %}bg-white text-gray-700{% endif %} hover:bg-primary hover:text-white transition duration-300">
+                    {{ type_name }}
+                </a>
+                {% endfor %}
             </div>
         </div>
 

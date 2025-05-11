@@ -56,7 +56,10 @@ def about(request):
     })
 
 def destinations(request):
-    destinations = Destination.objects.all()
+    destinations = Destination.objects.all().order_by('?')
+    featured = request.GET.get('featured')
+    if featured:
+        destinations = destinations.filter(featured=True)
     return render(request, 'main/destinations.html', {
         'destinations': destinations
     })
