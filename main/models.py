@@ -89,6 +89,8 @@ class PackageImage(models.Model):
     image = CloudinaryField('image', folder='packages')
     is_featured = models.BooleanField(default=False)
 
+import uuid
+
 class Booking(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
@@ -100,9 +102,17 @@ class Booking(models.Model):
     # Use the same tour types as Package model
     PACKAGE_TYPE_CHOICES = Package.TOUR_TYPES
 
+    # Booking identifier
+    booking_id = models.CharField(max_length=50, unique=True, null=True, blank=True, editable=False)
+
     # User and Package
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     package = models.ForeignKey(Package, on_delete=models.CASCADE, null=True, blank=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.booking_id:
+            self.booking_id = str(uuid.uuid4())
+        super().save(*args, **kwargs)
     
     # Contact Information
     full_name = models.CharField(max_length=200, null=True, blank=True)

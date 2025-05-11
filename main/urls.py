@@ -17,6 +17,7 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('book/', views.book, name='book'),
     path('booking/create/', views.booking_create, name='booking_create'),
+    path('my-bookings/', views.my_bookings, name='my_bookings'),
     path('booking/<int:id>/', views.booking_detail, name='booking_detail'),
     path('booking/<int:id>/cancel/', views.booking_cancel, name='booking_cancel'),
     path('blog/new/', views.BlogCreateView.as_view(), name='blog_create'),

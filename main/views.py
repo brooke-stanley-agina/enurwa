@@ -172,14 +172,39 @@ def booking_create(request):
 
             # Return JSON response for API calls
             if request.content_type == 'application/json':
-                return JsonResponse({
+                # Get existing booking IDs from cookies
+                booking_ids = request.COOKIES.get('booking_ids', '')
+                booking_id_list = booking_ids.split(',') if booking_ids else []
+                
+                # Add new booking ID
+                booking_id_list.append(str(booking.booking_id))
+                
+                # Create response
+                response = JsonResponse({
                     'message': 'Booking request submitted successfully',
-                    'booking_id': booking.id
+                    'booking_id': booking.booking_id
                 })
+                
+                # Set cookie with updated booking IDs
+                response.set_cookie('booking_ids', ','.join(booking_id_list), max_age=365*24*60*60)  # 1 year expiry
+                
+                return response
             
-            # Redirect for form submissions
+            # Get existing booking IDs from cookies
+            booking_ids = request.COOKIES.get('booking_ids', '')
+            booking_id_list = booking_ids.split(',') if booking_ids else []
+            
+            # Add new booking ID
+            booking_id_list.append(str(booking.booking_id))
+            
+            # Create response
+            response = redirect('package_detail', slug=package.slug)
+            
+            # Set cookie with updated booking IDs
+            response.set_cookie('booking_ids', ','.join(booking_id_list), max_age=365*24*60*60)  # 1 year expiry
+            
             messages.success(request, 'Thank you for your booking request! We will contact you shortly at ' + data.get('email'))
-            return redirect('package_detail', slug=package.slug)
+            return response
 
         except Exception as e:
             print('Error creating booking:', str(e))
@@ -189,6 +214,15 @@ def booking_create(request):
             return redirect('package_detail', slug=package.slug)
 
     return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+def my_bookings(request):
+    booking_ids = request.COOKIES.get('booking_ids', '')
+    if booking_ids:
+        booking_ids = booking_ids.split(',')
+        bookings = Booking.objects.filter(booking_id__in=booking_ids).order_by('-booking_date')
+    else:
+        bookings = []
+    return render(request, 'main/my_bookings.html', {'bookings': bookings})
 
 @login_required
 def booking_detail(request, id):

@@ -1,0 +1,83 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-primary mb-8">My Bookings</h1>
+
+    {% if bookings %}
+    <div class="grid gap-6">
+        {% for booking in bookings %}
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <div class="flex flex-wrap justify-between items-start mb-4">
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-800">{{ booking.package.name }}</h2>
+                    <p class="text-gray-600">Booking ID: {{ booking.booking_id }}</p>
+                </div>
+                <div class="flex items-center">
+                    {% if booking.status == 'pending' %}
+                    <span class="px-4 py-1 rounded-full bg-yellow-100 text-yellow-800">Pending</span>
+                    {% elif booking.status == 'approved' %}
+                    <span class="px-4 py-1 rounded-full bg-green-100 text-green-800">Approved</span>
+                    {% elif booking.status == 'rejected' %}
+                    <span class="px-4 py-1 rounded-full bg-red-100 text-red-800">Rejected</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="font-medium text-gray-700">Trip Details</h3>
+                        <div class="mt-2 space-y-2">
+                            <p><span class="text-gray-600">Start Date:</span> {{ booking.start_date|date:"M d, Y" }}</p>
+                            <p><span class="text-gray-600">End Date:</span> {{ booking.end_date|date:"M d, Y" }}</p>
+                            <p><span class="text-gray-600">Package Type:</span> {{ booking.get_preferred_package_type_display }}</p>
+                            <p><span class="text-gray-600">Group Size:</span> {{ booking.adults }} Adults, {{ booking.children }} Children</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="font-medium text-gray-700">Contact Information</h3>
+                        <div class="mt-2 space-y-2">
+                            <p><span class="text-gray-600">Full Name:</span> {{ booking.full_name }}</p>
+                            <p><span class="text-gray-600">Email:</span> {{ booking.email }}</p>
+                            <p><span class="text-gray-600">Phone:</span> {{ booking.phone }}</p>
+                            <p><span class="text-gray-600">Country:</span> {{ booking.country }}</p>
+                        </div>
+                    </div>
+
+                    {% if booking.special_requests %}
+                    <div>
+                        <h3 class="font-medium text-gray-700">Special Requests</h3>
+                        <p class="mt-2 text-gray-600">{{ booking.special_requests }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if booking.status == 'approved' %}
+            <div class="mt-6 p-4 bg-green-50 rounded-lg">
+                <p class="text-green-800">Your booking has been approved! We'll be in touch with further details soon.</p>
+            </div>
+            {% elif booking.status == 'rejected' %}
+            <div class="mt-6 p-4 bg-red-50 rounded-lg">
+                <p class="text-red-800">Unfortunately, we couldn't accommodate your booking at this time. Please contact us for more information.</p>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-12">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4">No Bookings Found</h2>
+        <p class="text-gray-600 mb-8">You haven't made any bookings yet.</p>
+        <a href="{% url 'packages' %}" class="inline-block bg-primary hover:bg-primary-light text-white px-6 py-3 rounded-lg transition duration-300">
+            Browse Our Packages
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
