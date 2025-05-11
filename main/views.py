@@ -62,7 +62,7 @@ def destinations(request):
     })
 
 def packages(request):
-    packages = Package.objects.all().prefetch_related('daily_itinerary')
+    packages = Package.objects.all().prefetch_related('daily_itinerary').order_by('?')
     tour_type = request.GET.get('tour_type')
     featured = request.GET.get('featured')
     destination = request.GET.get('destination')
