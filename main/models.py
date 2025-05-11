@@ -2,12 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django.utils import timezone
+from cloudinary.models import CloudinaryField
 
 class Destination(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
     description = models.TextField()
-    image = models.ImageField(upload_to='destinations/')
+    image = CloudinaryField('image', folder='destinations')
     featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -85,7 +86,7 @@ class Package(models.Model):
 
 class PackageImage(models.Model):
     package = models.ForeignKey(Package, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='packages/')
+    image = CloudinaryField('image', folder='packages')
     is_featured = models.BooleanField(default=False)
 
 class Booking(models.Model):
@@ -145,7 +146,7 @@ class UserProfile(models.Model):
     phone = models.CharField(max_length=20)
     address = models.TextField()
     nationality = models.CharField(max_length=100)
-    profile_picture = models.ImageField(upload_to='profiles/', null=True, blank=True)
+    profile_picture = CloudinaryField('image', folder='profiles', null=True, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -154,7 +155,7 @@ class UserProfile(models.Model):
 class Testimonial(models.Model):
     name = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='testimonials/', null=True, blank=True)
+    image = CloudinaryField('image', folder='testimonials', null=True, blank=True)
     rating = models.PositiveIntegerField(choices=[(i, i) for i in range(1, 6)])
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -168,7 +169,7 @@ class Safari(models.Model):
     description = models.TextField()
     duration = models.IntegerField(help_text="Duration in days")
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to='safaris/', blank=True, null=True)
+    image = CloudinaryField('image', folder='package_images', blank=True, null=True)
     included_services = models.TextField(help_text="List of services included in the package")
     is_featured = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
