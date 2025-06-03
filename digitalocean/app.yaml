@@ -1,0 +1,57 @@
+name: enurwa-safaris
+services:
+- name: web
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: your-username/your-repo-name
+
+  # The path to the Dockerfile relative to the root of the repo.
+  # To use the Dockerfile in the root directory, use "/".
+  dockerfile_path: Dockerfile
+
+  # The name of the branch that will be deployed. Defaults to the default branch of the repository.
+  source_dir: /
+
+  # The HTTP port that the container will listen on.
+  http_port: 8000
+
+  # The command to run the app.
+  run_command: gunicorn --worker-tmp-dir /dev/shm enurwa_safaris.wsgi:application --bind 0.0.0.0:8000
+
+  # The number of instances to run.
+  instance_count: 1
+  instance_size_slug: basic-xxs
+
+  # Environment variables
+  envs:
+    - key: DEBUG
+      value: "False"
+    - key: DJANGO_SETTINGS_MODULE
+      value: enurwa_safaris.settings
+    - key: PYTHONUNBUFFERED
+      value: "1"
+    - key: DISABLE_COLLECTSTATIC
+      value: "1"
+    - key: SECRET_KEY
+      scope: RUN_AND_BUILD_TIME
+      value: ${SECRET_KEY}
+    - key: CLOUDINARY_URL
+      scope: RUN_AND_BUILD_TIME
+      value: ${CLOUDINARY_URL}
+    - key: DATABASE_URL
+      scope: RUN_AND_BUILD_TIME
+      value: ${DATABASE_URL}
+
+# Database configuration
+databases:
+- engine: PG
+  name: enurwa-db
+  version: "14"
+
+# Add a custom domain (uncomment and update when ready)
+#domains:
+#  - name: yourdomain.com
+#    type: PRIMARY
+#  - name: www.yourdomain.com
+#    type: ALIAS

@@ -29,9 +29,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', '_2y#27vr*_81mj0di$-3_$^yio19o=6@0cxx7s2ar$*43')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['emurwa.onrender.com', '.onrender.com', 'localhost', '127.0.0.1']
+# Get the DigitalOcean App Platform's assigned domain
+DIGITALOCEAN_APP_URL = os.environ.get('DIGITALOCEAN_APP_URL', '')
+
+# Allow the app's domain, localhost for development, and any custom domains
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+if DIGITALOCEAN_APP_URL:
+    ALLOWED_HOSTS.append(DIGITALOCEAN_APP_URL)
+    CSRF_TRUSTED_ORIGINS = [f'https://{DIGITALOCEAN_APP_URL}']
+
+# Add your custom domain if you have one
+CUSTOM_DOMAIN = os.environ.get('CUSTOM_DOMAIN', '')
+if CUSTOM_DOMAIN:
+    ALLOWED_HOSTS.append(CUSTOM_DOMAIN)
+    CSRF_TRUSTED_ORIGINS.append(f'https://{CUSTOM_DOMAIN}')
 
 
 # Application definition
@@ -89,16 +102,28 @@ WSGI_APPLICATION = 'enurwa_safaris.wsgi.application'
 
 # Database configuration
 # Uses DATABASE_URL from environment (PostgreSQL example: 'postgres://USER:PASSWORD@HOST:PORT/DBNAME')
-# Falls back to SQLite for development if DATABASE_URL is not set
-# Enforce PostgreSQL usage: require DATABASE_URL to be set
-if not os.environ.get('DATABASE_URL'):
-    raise RuntimeError("DATABASE_URL environment variable must be set for PostgreSQL configuration.")
-
+# Database configuration
 DATABASES = {
-    'default': dj_database_url.config(
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'neondb',
+        'USER': 'neondb_owner',
+        'PASSWORD': 'npg_CirYTzax9p1f',  # Consider using environment variables in production
+        'HOST': 'ep-green-union-a5e1k1e7-pooler.us-east-2.aws.neon.tech',
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',
+            'options': 'endpoint=ep-green-union-a5e1k1e7-pooler',
+        },
+    }
 }
+
+# For development, you can fall back to SQLite if needed
+if os.environ.get('USE_SQLITE', 'False').lower() == 'true':
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 
 
 
@@ -160,11 +185,27 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Security settings
+# Security settings for production
 if not DEBUG:
+    # Security middleware settings
     SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    
+    # Session settings
     SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
+    
+    # CSRF settings
     CSRF_COOKIE_SECURE = True
+    CSRF_USE_SESSIONS = False
+    
+    # Other security settings
     SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = 'DENY'
     SECURE_CONTENT_TYPE_NOSNIFF = True
     X_FRAME_OPTIONS = 'DENY'
     SECURE_HSTS_SECONDS = 31536000  # 1 year
