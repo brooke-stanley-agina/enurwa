@@ -106,14 +106,14 @@ WSGI_APPLICATION = 'enurwa_safaris.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'neondb',
-        'USER': 'neondb_owner',
-        'PASSWORD': 'npg_CirYTzax9p1f',  # Consider using environment variables in production
-        'HOST': 'ep-green-union-a5e1k1e7-pooler.us-east-2.aws.neon.tech',
-        'PORT': '5432',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
         'OPTIONS': {
             'sslmode': 'require',
-            'options': 'endpoint=ep-green-union-a5e1k1e7-pooler',
+            'options': f'endpoint={os.environ.get("DB_ENDPOINT")}',
         },
     }
 }
